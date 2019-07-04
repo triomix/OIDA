@@ -16,110 +16,211 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+function modelLoaded() {
+    console.log('Model loaded!');
+}
+// Predict the current frame.
+function predict() {
+    classifier.predict(gotResults);
+}
+
+
+
+// Show the results
+function gotResults(err, results) {
+    // Display any error
+    if (err) {
+        console.error(err);
+    }
+    if (results && results[0]) {
+        result.innerText = results[0].label;
+        confidence.innerText = results[0].confidence;
+        classifier.classify(gotResults);
+        console.log(results[0].label);
+    }
+}
+
 const app = new Vue({
     el:'#app',
     data:{
-        status:false
+        status:false,
+        classifier: null,
+        featureExtractor: null
     },
     methods:{
         init:function() {
 
             this.status = true;
+            this.addButtonListeners();
+       
+        },
+                    
+        addButtonListeners:function() {
 
-            document.querySelector("#takeVideo").addEventListener("touchend", function() {
-               
-                console.log("Take video");
+          // video start
+          document.querySelector("#start-video").addEventListener("click", this.startVideo, false);
+          document.querySelector("#start-video").addEventListener("touchend", this.startVideo, false);
 
-                var srcType = Camera.PictureSourceType.CAMERA;
-                var options = setOptions(srcType);
-                var func = createNewFileEntry;
-            
-                navigator.camera.getPicture(function cameraSuccess(imageUri) {
-            
-                    displayImage(imageUri);
-                    // You may choose to copy the picture, save it somewhere, or upload.
-                   // func(imageUri);
-            
-                }, function cameraError(error) {
-                    console.debug("Unable to obtain picture: " + error, "app");
-            
-                }, options);
+          document.querySelector('#addone').addEventListener("click", this.addOne, false);
 
-            }, false);
+        },
+        
+        startVideo:function() {
+                    
+          console.log("Starting video capture");
+
+          var srcType = Camera.PictureSourceType.CAMERA;
+          var options = this.setVideoOptions(srcType);            
+          navigator.camera.getPicture(this.onVideoSuccess, this.onVideoError, options);
+          this.startClassifier();
+
+        },
+        setVideoOptions:function(srcType) {
+
+          let options = {
+            // Some common settings are 20, 50, and 100
+            quality: 50,
+            destinationType: Camera.DestinationType.FILE_URI,
+            // In this app, dynamically set the picture source, Camera or photo gallery
+            sourceType: srcType,
+            encodingType: Camera.EncodingType.JPEG,
+            mediaType: Camera.MediaType.VIDEO,
+            allowEdit: true,
+            correctOrientation: true  //Corrects Android orientation quirks
+          }
+          return options;
+
+        },
+
+        onVideoSuccess:function(imageUri) {
+            console.log("Video capture sucess");
+            console.log("imageUri" + imageUri);
+            this.displayImage(imageUri);
+        },
+        onVideoError:function() {
+          console.log("Unable to obtain picture: " + error, "app");
+        },
+        displayImage:function(imgUri) {
+
+          console.log("Display Image");
+          let elem = document.getElementById('video');
+          elem.src = imgUri;
+        },
+
+        startClassifier:function() {
+
+          this.featureExtractor = ml5.featureExtractor('MobileNet', modelLoaded);
+          let video = document.getElementById('video');
+          this.classifier = this.featureExtractor.classification(video, this.videoReady);
+          console.log(video);
+
+          document.querySelector('#addone').addEventListener("click", this.addOne);
 
 
-            document.querySelector("#takeVideo").addEventListener("click", function() {
-                console.log("Take video");
+        },
+        videoReady:function() {
+          console.log("video readuy");
+        },
 
-                var srcType = Camera.PictureSourceType.CAMERA;
-                var options = setOptions(srcType);
-                var func = createNewFileEntry;
-            
-                navigator.camera.getPicture(function cameraSuccess(imageUri) {
-            
-                    displayImage(imageUri);
-                    // You may choose to copy the picture, save it somewhere, or upload.
-                    func(imageUri);
-            
-                }, function cameraError(error) {
-                    console.debug("Unable to obtain picture: " + error, "app");
-            
-                }, options);
-
-            }, false);
+        addOne:function() {
+          this.classifier.addImage('one');
 
         }
     }
 })
 
-function displayImage(imgUri) {
 
-    var elem = document.getElementById('imageFile');
-    elem.src = imgUri;
+
+
+/*
+//----------- ML stuff
+// Grab all the DOM elements
+var video = document.getElementById('video');
+var videoStatus = document.getElementById('videoStatus');
+var loading = document.getElementById('loading');
+var catButton = document.getElementById('catButton');
+var dogButton = document.getElementById('dogButton');
+var amountOfCatImages = document.getElementById('amountOfCatImages');
+var amountOfDogImages = document.getElementById('amountOfDogImages');
+var train = document.getElementById('train');
+var loss = document.getElementById('loss');
+var result = document.getElementById('result');
+var confidence = document.getElementById('confidence');
+var predict = document.getElementById('predict');
+
+// A variable to store the total loss
+let totalLoss = 0;
+
+// Create a webcam capture
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then((stream) => {
+    video.srcObject = stream;
+    video.play();
+  })
+
+// A function to be called when the model has been loaded
+function modelLoaded() {
+  loading.innerText = 'Model loaded!';
 }
 
-function setOptions(srcType) {
-    var options = {
-        // Some common settings are 20, 50, and 100
-        quality: 50,
-        destinationType: Camera.DestinationType.FILE_URI,
-        // In this app, dynamically set the picture source, Camera or photo gallery
-        sourceType: srcType,
-        encodingType: Camera.EncodingType.JPEG,
-        mediaType: Camera.MediaType.PICTURE,
-        allowEdit: true,
-        correctOrientation: true  //Corrects Android orientation quirks
+
+
+// Predict the current frame.
+function predict() {
+  classifier.predict(gotResults);
+}
+
+// A function to be called when the video is finished loading
+function videoReady() {
+  videoStatus.innerText = 'Video ready!';
+}
+
+// When the Cat button is pressed, add the current frame
+// from the video with a label of cat to the classifier
+catButton.onclick = function () {
+  classifier.addImage('cat');
+  amountOfCatImages.innerText = Number(amountOfCatImages.innerText) + 1;
+}
+
+// When the Cat button is pressed, add the current frame
+// from the video with a label of cat to the classifier
+dogButton.onclick = function () {
+  classifier.addImage('dog');
+  amountOfDogImages.innerText = Number(amountOfDogImages.innerText) + 1;
+}
+
+// When the train button is pressed, train the classifier
+// With all the given cat and dog images
+train.onclick = function () {
+  classifier.train(function(lossValue) {
+    if (lossValue) {
+      totalLoss = lossValue;
+      loss.innerHTML = 'Loss: ' + totalLoss;
+    } else {
+      loss.innerHTML = 'Done Training! Final Loss: ' + totalLoss;
     }
-    return options;
+  });
 }
 
-function captureError(e) {
-	console.log("capture error: "+JSON.stringify(e));
+// Show the results
+function gotResults(err, results) {
+  // Display any error
+  if (err) {
+    console.error(err);
+  }
+  if (results && results[0]) {
+    result.innerText = results[0].label;
+    confidence.innerText = results[0].confidence;
+    classifier.classify(gotResults);
+  }
 }
 
-function captureSuccess(s) {
-	console.log("Success");
-	console.dir(s[0]);
-	var v = "<video controls='controls'>";
-	v += "<source src='" + s[0].fullPath + "' type='video/mp4'>";
-	v += "</video>";
-	document.querySelector("#videoArea").innerHTML = v;
+// Start predicting when the predict button is clicked
+predict.onclick = function () {
+  classifier.classify(gotResults);
 }
 
-function createNewFileEntry(imgUri) {
-    window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function success(dirEntry) {
-
-        // JPEG file
-        dirEntry.getFile("tempFile.jpeg", { create: true, exclusive: false }, function (fileEntry) {
-
-            // Do something with it, like write to it, upload it, etc.
-            // writeFile(fileEntry, imgUri);
-            console.log("got file: " + fileEntry.fullPath);
-            // displayFileData(fileEntry.fullPath, "File copied to");
-
-        }, onErrorCreateFile);
-
-    }, onErrorResolveUrl);
-}
+*/
 
 document.addEventListener('deviceready', app.init);
