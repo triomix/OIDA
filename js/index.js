@@ -27,6 +27,7 @@ function predict() {
 
 
 
+
 // Show the results
 function gotResults(err, results) {
     // Display any error
@@ -46,35 +47,140 @@ const app = new Vue({
     data:{
         status:false,
         classifier: null,
-        featureExtractor: null
+        featureExtractor: null,
+        isBrowser:true,
+        numOne: 0,
+        numTwo:0
     },
     methods:{
         init:function() {
 
             this.status = true;
             this.addButtonListeners();
-       
+            this.populateSources();
+            this.startClassifier();
+
+            document.querySelector('#text').innerText = "hello";
         },
                     
         addButtonListeners:function() {
 
           // video start
-          //document.querySelector("#start-video").addEventListener("click", this.startVideo, false);
+          document.querySelector("#start-video").addEventListener("click", this.startVideo, false);
           document.querySelector("#start-video").addEventListener("touchend", this.startVideo, false);
           document.querySelector('#addone').addEventListener("click", this.addOne, false);
+          document.querySelector('#addtwo').addEventListener("click", this.addTwo, false);
+
           document.querySelector('#train').addEventListener("click", this.train, false);
           document.querySelector('#predict').addEventListener("click", this.predict, false);
+          document.querySelector('#save').addEventListener("click", this.save, false);
 
         },
+
+        populateSources:function() {
+          var audioSelect = document.querySelector('select#audioSource');
+          var videoSelect = document.querySelector('select#videoSource');
+
+          navigator.mediaDevices.enumerateDevices().then(this.gotDevices).then(this.getStream).catch(this.handleError);
+
+          audioSelect.onchange = this.getStream;
+          videoSelect.onchange = this.getStream;
+        },
+        handleError:function(error) {
+          console.log('Error: ', error);
+          document.querySelector('#text').innerText = error;
+
+        },
+
+        gotDevices:function(deviceInfos) {
+
+
+          var audioSelect = document.querySelector('select#audioSource');
+          var videoSelect = document.querySelector('select#videoSource');
+
+          for (var i = 0; i !== deviceInfos.length; ++i) {
+            var deviceInfo = deviceInfos[i];
+            var option = document.createElement('option');
+            option.value = deviceInfo.deviceId;
+            if (deviceInfo.kind === 'audioinput') {
+              option.text = deviceInfo.label ||
+                'microphone ' + (audioSelect.length + 1);
+              audioSelect.appendChild(option);
+            } else if (deviceInfo.kind === 'videoinput') {
+              option.text = deviceInfo.label || 'camera ' +
+                (videoSelect.length + 1);
+              videoSelect.appendChild(option);
+            } else {
+              console.log('Found one other kind of source/device: ', deviceInfo);
+            }
+          }
+        },
+
+        getStream:function(){
+
+          var audioSelect = document.querySelector('select#audioSource');
+          var videoSelect = document.querySelector('select#videoSource');
+
+          if (window.stream) {
+            window.stream.getTracks().forEach(function(track) {
+              track.stop();
+            });
+          }
         
+          var constraints = {
+            audio: {
+              deviceId: {exact: audioSelect.value}
+            },
+            video: {
+              deviceId: {exact: videoSelect.value}
+            }
+          };
+          document.querySelector('#text').innerText = "GET video";
+
+          navigator.mediaDevices.getUserMedia(constraints).
+            then(this.gotStream).catch(this.handleError);
+        }, 
+        
+        gotStream:function(stream) {
+          window.stream = stream; // make stream available to console
+
+          var video = document.getElementById('video');
+          video.srcObject = stream;
+
+        },
+
         startVideo:function() {
                     
           console.log("Starting video capture");
+          document.querySelector('#text').innerText = "Starting video capture";
+          var video = document.getElementById('video');
+          const constraints = {
+            video: {
+              deviceId: {exact: 1}
+            }
+        };
 
+          if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: constraints }).then(stream => {
+              video.srcObject = stream;
+              //video.play();
+            });
+          } else {
+            console.log("what the fuck");
+            
+          }
+          /*
           var srcType = Camera.PictureSourceType.CAMERA;
           var options = this.setVideoOptions(srcType);            
           navigator.camera.getPicture(this.onVideoSuccess, this.onVideoError, options);
+          */
+          // Create a webcam capture
           this.startClassifier();
+
+        },
+        play:function() {
+          var video = document.getElementById('video');
+          video.play();
 
         },
         setVideoOptions:function(srcType) {
@@ -86,8 +192,8 @@ const app = new Vue({
             // In this app, dynamically set the picture source, Camera or photo gallery
             sourceType: srcType,
             encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
-            allowEdit: true,
+            mediaType: Camera.MediaType.CAMERA,
+            allowEdit: false,
             correctOrientation: true  //Corrects Android orientation quirks
           }
           return options;
@@ -104,9 +210,46 @@ const app = new Vue({
         },
         displayImage:function(imgUri) {
 
-          console.log("Display Image");
+          /*
+          if(!this.isBrowser) {
+            console.log("Display Image");
           let elem = document.getElementById('image');
-          elem.src = imgUri;
+            elem.src = imgUri;
+
+          } else {
+            
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+
+            var image = new Image();
+            image.onload = function() {
+              ctx.drawImage(image, 0, 0);
+            };
+            image.src = "data:image/jpg;base64,"+imgUri;
+
+            this.classifier.addImage(image, 'one');
+            this.classifier.addImage(image, 'one');
+            this.classifier.addImage(image, 'one');
+
+            this.classifier.train();
+            this.classifier.classify(image, (err, result) => {
+
+              if (err)  
+                console.log(err);
+                else {
+              // this should be labels
+              console.log('rating: ' + result);
+                }
+            
+            });
+
+           // image.src = imgUri;
+          }
+
+
+         // this.train();
+
+        
 
           /*
           var canvas = document.getElementById("canvas");
@@ -132,16 +275,21 @@ const app = new Vue({
 
         startClassifier:function() {
 
-          this.featureExtractor = ml5.featureExtractor('MobileNet', modelLoaded);
+          this.featureExtractor = ml5.featureExtractor('MobileNet', this.modelLoaded);
+          var video = document.getElementById('video');
+          this.classifier = this.featureExtractor.classification(video, this.videoReady);
 
-          let video = document.getElementById('canvas');
 
-         // let videosContainers = document.getElementsByClassName("cordova-camera-capture");
+        },
+        modelLoaded:function() {
+          console.log('Model loaded!');
+          document.querySelector('#text').innerText = "Model loaded";
+          this.classifier.load("models/model.json", this.customModelLoaded);
+        },
 
-          this.classifier = this.featureExtractor.classification();
-
-          //document.querySelector('#addone').addEventListener("click", this.addOne);
-
+        customModelLoaded:function() {
+          console.log('Custom Model loaded!');
+          document.querySelector('#text').innerText = "Custom loaded";
 
         },
         videoReady:function() {
@@ -151,9 +299,11 @@ const app = new Vue({
         train:function() {
           this.classifier.train(function(lossValue) {
             if (lossValue) {
-              console.log('Loss: ' + totalLoss);
+              console.log('Loss: ' + lossValue);
+              document.querySelector('#text').innerText = "lossValue! " + lossValue;
             } else {
-              console.log('Done Training! Final Loss: ' + totalLoss);
+              console.log('Done Training! Final Loss: ');
+              document.querySelector('#text').innerText = "DONE";
             }
           });
         },
@@ -168,14 +318,28 @@ const app = new Vue({
           }
           if (results && results[0]) {
             console.log(results[0].label);
+            document.querySelector('#text').innerText = "Result! " + results[0].label;
           //  confidence.innerText = results[0].confidence;
-          this.classifier.classify(gotResults);
+          //this.classifier.classify(gotResults);
           }
         },
 
         addOne:function() {
           this.classifier.addImage('one');
+          this.numOne++;
+          document.querySelector('#text').innerText = "Add one ! " + this.numOne;
 
+
+        },
+        addTwo:function() {
+          this.classifier.addImage('two');
+          this.numTwo++;
+          document.querySelector('#text').innerText = "add two !" + this.numTwo;
+
+
+        },
+        save:function() {
+          this.classifier.save();
         }
     }
 })
@@ -273,4 +437,5 @@ predict.onclick = function () {
 
 */
 
-document.addEventListener('deviceready', app.init);
+//document.addEventListener('deviceready', app.init);
+app.init();

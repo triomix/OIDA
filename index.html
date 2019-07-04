@@ -29,11 +29,9 @@
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
 
-        <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src ‘self’ gap://ready file://* *;  style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.storage.googleapis.com ">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>Hello World</title>
     </head>
     <body>
@@ -43,19 +41,32 @@
             App super startus: {{ status }}
 
             <button id="start-video">Take Video</button>
-            <video style="max-width: 100%;" id="video"></video>
-            <img style="max-width: 100%;" id="image"></img>
-            <canvas style="max-width: 100%;" id="canvas"></canvas>
+
+            <div class="select">
+                <label for="audioSource">Audio source: </label><select id="audioSource"></select>
+            </div>
+
+            <div class="select">
+                <label for="videoSource">Video source: </label><select id="videoSource"></select>
+            </div>
+
+
+            <video id="video" width="640" height="480" autoplay  webkit-playsinline="true" playsinline="true"></video>
 
             <button id="addone">Add one</button>
             <button id="addtwo">Add two</button>
             <button id="train">train</button>
             <button id="predict">predict</button>
+            <button id="save">save</button>
+
+            <div id="text"></div>
 
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
+        <!--<script type="text/javascript" src="cordova.js"></script>-->
         <script type="text/javascript" src="js/vue.min.js"></script>
         <script type="text/javascript" src="js/ml5.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     </body>
 </html>
