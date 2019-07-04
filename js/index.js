@@ -59,10 +59,11 @@ const app = new Vue({
         addButtonListeners:function() {
 
           // video start
-          document.querySelector("#start-video").addEventListener("click", this.startVideo, false);
+          //document.querySelector("#start-video").addEventListener("click", this.startVideo, false);
           document.querySelector("#start-video").addEventListener("touchend", this.startVideo, false);
-
           document.querySelector('#addone').addEventListener("click", this.addOne, false);
+          document.querySelector('#train').addEventListener("click", this.train, false);
+          document.querySelector('#predict').addEventListener("click", this.predict, false);
 
         },
         
@@ -85,7 +86,7 @@ const app = new Vue({
             // In this app, dynamically set the picture source, Camera or photo gallery
             sourceType: srcType,
             encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.VIDEO,
+            mediaType: Camera.MediaType.PICTURE,
             allowEdit: true,
             correctOrientation: true  //Corrects Android orientation quirks
           }
@@ -104,23 +105,72 @@ const app = new Vue({
         displayImage:function(imgUri) {
 
           console.log("Display Image");
-          let elem = document.getElementById('video');
+          let elem = document.getElementById('image');
           elem.src = imgUri;
+
+          /*
+          var canvas = document.getElementById("canvas");
+          var ctx = canvas.getContext("2d");
+
+          var image = new Image();
+          image.onload = function() {
+            ctx.drawImage(image, 0, 0);
+          };
+          i//mage.src = "data:image/jpg;base64,"+imgUri;
+          image.src = imgUri;
+
+          */
+
+          /*
+          this.classifier.addImage(image, 'one', function() {
+            console.log("all done");
+          });
+
+          */
+
         },
 
         startClassifier:function() {
 
           this.featureExtractor = ml5.featureExtractor('MobileNet', modelLoaded);
-          let video = document.getElementById('video');
-          this.classifier = this.featureExtractor.classification(video, this.videoReady);
-          console.log(video);
 
-          document.querySelector('#addone').addEventListener("click", this.addOne);
+          let video = document.getElementById('canvas');
+
+         // let videosContainers = document.getElementsByClassName("cordova-camera-capture");
+
+          this.classifier = this.featureExtractor.classification();
+
+          //document.querySelector('#addone').addEventListener("click", this.addOne);
 
 
         },
         videoReady:function() {
-          console.log("video readuy");
+          console.log("video ready");
+        },
+
+        train:function() {
+          this.classifier.train(function(lossValue) {
+            if (lossValue) {
+              console.log('Loss: ' + totalLoss);
+            } else {
+              console.log('Done Training! Final Loss: ' + totalLoss);
+            }
+          });
+        },
+        predict:function() {
+          this.classifier.classify(this.gotResults);
+        },
+
+        gotResults:function(err, results) {
+          // Display any error
+          if (err) {
+            console.error(err);
+          }
+          if (results && results[0]) {
+            console.log(results[0].label);
+          //  confidence.innerText = results[0].confidence;
+          this.classifier.classify(gotResults);
+          }
         },
 
         addOne:function() {
