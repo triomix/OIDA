@@ -21,7 +21,7 @@
     </head>
 <body>
 
-<div id="historique_header">
+<div id="historique_header" style="border-bottom: 5px solid #EBFF00;">
     <div id="header-e1">
         <button name="buttonClick" onclick="callAnothePage2()"><img id="image_header" src="img/arrow_back.png" alt="Back"></button>
     </div>
@@ -38,21 +38,21 @@
 ANTIDOTES
 </div>
 <div id="advices_block">
-    <p> des solutions plus durables, plus écologiques et plus saines </p>
+    <p> des solutions plus durables, <br/> plus écologiques et plus saines </p>
 </div>
 
 <div id="titre2">
 les alternatives
 </div>
 
-<div id="antidote"> 
-    <p style="font-weight: bold;"> l'eau du robinet </p>
-    <p> Nous avons la chance, l'eau de nos robinets est potable. Profitons-en ! </p>
+<div id="antidote" class=""> 
+    <a id="displayText" href="javascript:toggle();">l'eau du robinet</a> 
+    <div id="toggleText" style="display: none">Nous avons la chance, l'eau de nos robinets est potable. Profitons-en !</div>
 </div>
 
 <div id="antidote"> 
-    <p style="font-weight: bold;"> gourde en inox </p>
-    <p> Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour ou de mots aléatoires qui ne ressemblent pas une seconde à du texte standard. Si vous voulez utiliser un passage du Lorem Ipsum, vous devez être sûr qu'il n'y a rien d'embarrassant caché dans le texte. Tous les générateurs de Lorem Ipsum sur Internet tendent à reproduire le mê </p>
+    <a id="displayText2" href="javascript:toggle2();">la gourde en inox</a> 
+    <div id="toggleText2" style="display: none">Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour ou de mots aléatoires qui ne ressemblent pas une seconde à du texte standard. Si vous voulez utiliser un passage du Lorem Ipsum, vous devez être sûr qu'il n'y a rien d'embarrassant caché dans le texte. Tous les générateurs de Lorem Ipsum sur Internet tendent à reproduire le mê </div>
 </div>
 
 
@@ -60,13 +60,16 @@ les alternatives
 les initiatives de la communauté
 </div>
 <div id="antidote"> 
-    <p style="font-weight: bold;"> de la bouteille au vase </p>
-    <p> Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour ou de mots aléatoires qui ne ressemblent pas une seconde à du texte standard. Si vous voulez utiliser un passage du Lorem Ipsum, vous devez être sûr qu'il n'y a rien d'embarrassant caché dans le texte. Tous les générateurs de Lorem Ipsum sur Internet tendent à reproduire le mê </p>
+    
+    <a id="displayText3" href="javascript:toggle3();">de la bouteille au vase</a> 
+    <div id="toggleText3" style="display: none">Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour ou de mots aléatoires qui ne ressemblent pas une seconde à du texte standard. Si vous voulez utiliser un passage du Lorem Ipsum, vous devez être sûr qu'il n'y a rien d'embarrassant caché dans le texte. Tous les générateurs de Lorem Ipsum sur Internet tendent à reproduire le mê </div>
 </div>
+
 
 <div id="initiative"> 
     <p style="font-weight: bold;"> Ajouter mon initiative </p>
 </div>
+
 </body>
 
 <script type="text/javascript">
@@ -78,4 +81,42 @@ les initiatives de la communauté
      {
         window.location = "bouteille_PET.html";
      }
+
+    function toggle() {
+        var ele = document.getElementById("toggleText");
+        var text = document.getElementById("displayText");
+        if(ele.style.display == "block") {
+                ele.style.display = "none";
+            text.innerHTML = "l'eau du robinet";
+        }
+        else {
+            ele.style.display = "block";
+            text.innerHTML = "l'eau du robinet";
+        }
+    } 
+    function toggle2() {
+        var ele = document.getElementById("toggleText2");
+        var text = document.getElementById("displayText2");
+        if(ele.style.display == "block") {
+                ele.style.display = "none";
+            text.innerHTML = "la gourde en inox";
+        }
+        else {
+            ele.style.display = "block";
+            text.innerHTML = "la gourde en inox";
+        }
+    } 
+    function toggle3() {
+        var ele = document.getElementById("toggleText3");
+        var text = document.getElementById("displayText3");
+        if(ele.style.display == "block") {
+                ele.style.display = "none";
+            text.innerHTML = "de la bouteille au vase";
+        }
+        else {
+            ele.style.display = "block";
+            text.innerHTML = "de la bouteille au vase";
+        }
+    } 
+</script>
 </script>
