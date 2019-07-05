@@ -20,7 +20,7 @@ const app = new Vue({
           },
           {
             label:"four",
-            url:"bouteille_pet.html",
+            url:"bouteille_PET.html",
             name:"bouteille"
           },
           {
@@ -220,7 +220,7 @@ const app = new Vue({
             document.getElementById("results").style.visibility = "visible";
 
             var page = this.getPageForLabel(results[0].label);
-            document.getElementById("result").innerText = "Trouvé ! : " + page.name;
+            document.getElementById("result").innerText = "Trouvé ! " + page.name;
 
             this.currentPage = page;
 
