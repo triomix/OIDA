@@ -1,0 +1,124 @@
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta charset="utf-8"/>
+
+        <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src ‘self’ gap://ready file://* *;  style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.storage.googleapis.com ">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/details.css">
+        <title>OIDA</title>
+    </head>
+<body>
+
+<div id="historique_header" style="border-bottom: 5px solid #EBFF00;">
+    <div id="header-e1">
+        <button name="buttonClick" onclick="callAnothePage2()"><img id="image_header" src="img/arrow_back.png" alt="Back"></button>
+    </div>
+    <div id="header-e2">
+        <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/camera.png" alt="Camera">
+    </div> </button>
+    <div id="header-e3"> 
+        Verre
+    </div>
+
+</div>
+
+<div id="titre2">
+ANTIDOTES
+</div>
+<div id="advices_block">
+    <p> des solutions plus durables, <br/> plus écologiques et plus saines </p>
+</div>
+
+<div id="titre2">
+les alternatives
+</div>
+
+<div id="antidote" class=""> 
+    <a id="displayText" href="javascript:toggle();">La consigne</a> 
+    <div id="toggleText" style="display: none">Une bouteille en verre consignée émet jusqu’à 80% de moins de gaz à effet de serre (GES) qu’une bouteille à usage unique.
+D’autre part, la fabrication du verre consomme 15 fois plus d’énergie que le seul lavage d’une bouteille.
+La consigne, c’est donc écologique et économique ; que des avantages !
+
+Où trouver des <a href="http://www.jeanbouteille.fr/">bouteilles consignées ?</a>
+</div>
+</div>
+
+
+
+
+<div id="titre2">
+les initiatives de la communauté
+</div>
+<div id="antidote"> 
+    
+    <a id="displayText3" href="javascript:toggle3();">à venir !</a> 
+    <div id="toggleText3" style="display: none">Une idée arrive bientôt</div>
+</div>
+
+
+<div id="initiative"> 
+    <p style="font-weight: bold;"> Ajouter mon initiative </p>
+</div>
+
+</body>
+
+<script type="text/javascript">
+    function callAnothePage()
+     {
+        window.location = "index.html";
+     }
+     function callAnothePage2()
+     {
+        window.location = "bouteille_PET.html";
+     }
+
+    function toggle() {
+        var ele = document.getElementById("toggleText");
+        var text = document.getElementById("displayText");
+        if(ele.style.display == "block") {
+                ele.style.display = "none";
+            text.innerHTML = "Moins d'emballage";
+        }
+        else {
+            ele.style.display = "block";
+            text.innerHTML = "Moins d'emballage";
+        }
+    } 
+    function toggle2() {
+        var ele = document.getElementById("toggleText2");
+        var text = document.getElementById("displayText2");
+        if(ele.style.display == "block") {
+                ele.style.display = "none";
+            text.innerHTML = "Passer au vrac";
+        }
+        else {
+            ele.style.display = "block";
+            text.innerHTML = "Passer au vrac";
+        }
+    } 
+    function toggle3() {
+        var ele = document.getElementById("toggleText3");
+        var text = document.getElementById("displayText3");
+        if(ele.style.display == "block") {
+                ele.style.display = "none";
+            text.innerHTML = "des gateaux fait maison";
+        }
+        else {
+            ele.style.display = "block";
+            text.innerHTML = "des gateaux fait maison";
+        }
+    } 
+</script>
+</script>
