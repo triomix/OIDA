@@ -93,7 +93,7 @@ const app = new Vue({
                 nVideosCount ++;
 
             } else {
-              console.log('Found one other kind of source/device: ', deviceInfo);
+             // console.log('Found one other kind of source/device: ', deviceInfo);
             }
           }
 
