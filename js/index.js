@@ -15,17 +15,17 @@ const app = new Vue({
           },
           {
             label:"first",
-            url:"poivre.html",
-            name:"poivre"
+            url:"bouteille_verre.html",
+            name:"bouteille enverre"
           },
           {
             label:"four",
-            url:"bouteille.html",
+            url:"bouteille_pet.html",
             name:"bouteille"
           },
           {
             label:"second",
-            url:"canette.com",
+            url:"canette.html",
             name:"canette"
           }
         ]
