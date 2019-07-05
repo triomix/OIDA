@@ -20,21 +20,21 @@
     </head>
 <body>
 
-<div id="historique_header" style="border-bottom:3px solid #30EA9D">
+<div id="historique_header" style="border-bottom: 5px solid #EBFF00;">
     <div id="header-e1">
-        <img id="image_header" src="img/arrow_back.png" alt="Back">
+        <button name="buttonClick" onclick="callAnothePage2()"><img id="image_header" src="img/arrow_back.png" alt="Back"></button>
     </div>
     <div id="header-e2">
-        <img id="image_header" src="img/camera.png" alt="Camera">
-    </div>
+        <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/camera.png" alt="Camera">
+    </div> </button>
     <div id="header-e3">
-        Bouteille verre
+        Canette aluminium
     </div>
 
 </div>
 
-<div id="titre2">
-IMPACT
+<div id="titre2" style="margin-bottom: 25px;">
+IMPACTS
 </div>
 
 <div id="titre2">
@@ -42,18 +42,18 @@ Où ça va ?
 </div>
 
 <div id="advices_block">
-    <p> 1. centre de tri Paprec (Chassieu)
+  <p> 1. centre de tri Paprec (Chassieu)
 <br/><a>en savoir plus ></a> </p>
-    <p> 2. Centre de recyclage
-    <br/><a>en savoir plus ></a></p>
+  <p> 2. Centre de recyclage
+  <br/><a>en savoir plus ></a></p>
 </div>
 
 <div id="titre2">
 Qu'est ce que ça devient ?
 </div>
 <div id="advices_block">
-  <img src="img/bouteilleverre.png" style="height:100px; float: right; margin-right:30px; margin-left:auto; top:-10px;">
-  <p style="float:left; margin-left:30px;"> 1 kg recyclé</p>
+  <img src="img/chaise.png" style="height:100px; float: right; margin-right:30px; margin-left:auto; top:-10px;">
+  <p style="float:left; margin-left:30px;"> 570 <br/> canettes</p>
   <p style="font-size: 50px; font-weight:700;">=</p>
 
 </div>
@@ -63,43 +63,54 @@ Pourquoi recycler ?
 </div>
 
 <div id="advices_block">
-    <p> Tu sauves des tortues <br/> Tu économises nos ressources  </p>
+    <p> Tu sauves des tortues </p>
+    <p> Tu économises nos ressources  </p>
 </div>
 
+<div class="trait_dessus"><hr></div>
 <div id="titre2">
 Et en détails ?
 </div>
-<p id="details_block">Le verre est un matériau fabriqué par la fonte à 1500°C du sable (ou plus précisément de la silice qu’il contient).</p>
-
+<div id="details_block">
+    L’aluminium est un métal présent naturellement sur terre, il est extrait sous forme combiné par l’extraction de bauxite (combiné de 270 minéraux) et doit être séparé par la suite.
+</div>
 <div id="advices_block">
     <p style="font-weight: bold;"> empreinte carbone </p>
     <p> en CO2eq / kg  </p>
-    <img id="poubelle" src="img/poubelle.svg" align="left" style="left:70%; top:-5px;">
+    <img id="poubelle" src="img/poubelle.svg" align="left" style="left:80%; top:-5px;">
     <div id="gauge"></div>
     <div id="details_block">
-        La contribution à l‘effet de serre des emballages en verre est conséquente, car chaque emballage est lourd et demande donc beaucoup d’énergie lors de sa production.
-    </div>
+L’empreinte carbone de l’aluminium est très élevée à cause de l’énergie nécessaire toute au long du cycle de vie (extraction des minerais, transport, transformation ...).
 </div>
-
 
 <div id="advices_block">
     <p style="font-weight: bold;"> biodiversité </p>
     <p> Quel impact sur les animaux ?  </p>
-    <img id="poubelle" src="img/poubelle.svg" align="left" style="left:20%; top:-5px;">
+    <img id="poubelle" src="img/poubelle.svg" align="left" style="left:50%; top:-5px;">
     <div id="gauge"></div>
     <div id="details_block">
-        L’impact sur la biodiversité est plutôt faible car même si le verre rejeté dans la nature reste dans l’environnement sur le long terme il est faiblement toxique lors de sa décomposition.
-    </div>
+Si ça fin de vie pose peu de problème pour la biodiversité (100% de recyclabilité possible), il a un réel impact environnemental dans la contamination de l’environnement par les déchets miniers.
 </div>
-
 
 <div id="advices_block">
     <p style="font-weight: bold;"> recyclabilité </p>
     <p> Combien de fois cela se recycle ?  </p>
-    <img id="poubelle" src="img/poubelle.svg" align="left" style="left:35%; top:-5px;">
+    <img id="poubelle" src="img/poubelle.svg" align="left" style="left:10%; top:-5px;">
     <div id="gauge"></div>
     <div id="details_block">
-        Le verre est théoriquement recyclable à 100% mais demande une certaine quantité d’énergie pour le refondre, ce qui place le verre dans une catégorie de recyclabilité médiocre.
-    </div>
+      L’aluminium a une très bonne recyclabilité car il demande très peu d’énergie (5% de l’énergie de production) et il est recyclable à 100% sans perte de qualité.<br/><br/><br/>
 </div>
-<div><br/><br/><br/></div>
+
+</div>
+</body>
+
+<script type="text/javascript">
+    function callAnothePage()
+     {
+        window.location = "index.html";
+     }
+     function callAnothePage2()
+     {
+        window.location = "canette.html";
+     }
+</script>
