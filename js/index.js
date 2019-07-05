@@ -135,9 +135,7 @@ const app = new Vue({
         startVideo:function() {
 
           this.getStream();
-          return;
          
-
         },
         play:function() {
           var video = document.getElementById('video');
@@ -160,14 +158,6 @@ const app = new Vue({
           return options;
 
         },
-
-        onVideoSuccess:function(imageUri) {
-            console.log("Video capture sucess");
-        },
-        onVideoError:function() {
-          console.log("Unable to obtain picture: " + error, "app");
-        },
-
         startClassifier:function() {
 
           document.querySelector('#text').innerText = "Loading model";
@@ -264,9 +254,5 @@ const app = new Vue({
         }
     }
 })
-
-
-
-
 
 app.init();
