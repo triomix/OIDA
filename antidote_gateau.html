@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta charset="utf-8"/>
+
+        <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src ‘self’ gap://ready file://* *;  style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.storage.googleapis.com ">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/details.css">
+        <title>OIDA</title>
+    </head>
+<body>
+
+<div id="historique_header" style="border-bottom: 5px solid #EBFF00;">
+    <div id="header-e1">
+        <button name="buttonClick" onclick="callAnothePage2()"><img id="image_header" src="img/arrow_back.png" alt="Back"></button>
+    </div>
+    <div id="header-e2">
+        <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/camera.png" alt="Camera">
+    </div> </button>
+    <div id="header-e3"> 
+        Plastique dur
+    </div>
+
+</div>
+
+<div id="titre2">
+ANTIDOTES
+</div>
+<div id="advices_block">
+    <p> des solutions plus durables, <br/> plus écologiques et plus saines </p>
+</div>
+
+<div id="titre2">
+les alternatives
+</div>
+
+<div id="antidote" class=""> 
+    <a id="displayText" href="javascript:toggle();">Moins d'emballage</a> 
+    <div id="toggleText" style="display: none">Choisissez des produits avec moins d’emballages (pas d’emballages individuels, moins d’emballage plastique,…) ou en carton (recyclable).
+</div>
+</div>
+
+<div id="antidote"> 
+    <a id="displayText2" href="javascript:toggle2();">Passer au vrac</a> 
+    <div id="toggleText2" style="display: none">Tous les magasins bio ou de vrac proposent des gâteaux en vrac. Trouvez-vous une jolie boite à gâteaux ou un bocal que vous pourrez aller recharger en magasin. </div>
+</div>
+
+
+<div id="titre2">
+les initiatives de la communauté
+</div>
+<div id="antidote"> 
+    
+    <a id="displayText3" href="javascript:toggle3();">des gateaux fait maison</a> 
+    <div id="toggleText3" style="display: none">Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour ou de mots aléatoires qui ne ressemblent pas une seconde à du texte standard. Si vous voulez utiliser un passage du Lorem Ipsum, vous devez être sûr qu'il n'y a rien d'embarrassant caché dans le texte. Tous les générateurs de Lorem Ipsum sur Internet tendent à reproduire le mê </div>
+</div>
+
+
+<div id="initiative"> 
+    <p style="font-weight: bold;"> Ajouter mon initiative </p>
+</div>
+
+</body>
+
+<script type="text/javascript">
+    function callAnothePage()
+     {
+        window.location = "index.html";
+     }
+     function callAnothePage2()
+     {
+        window.location = "bouteille_PET.html";
+     }
+
+    function toggle() {
+        var ele = document.getElementById("toggleText");
+        var text = document.getElementById("displayText");
+        if(ele.style.display == "block") {
+                ele.style.display = "none";
+            text.innerHTML = "Moins d'emballage";
+        }
+        else {
+            ele.style.display = "block";
+            text.innerHTML = "Moins d'emballage";
+        }
+    } 
+    function toggle2() {
+        var ele = document.getElementById("toggleText2");
+        var text = document.getElementById("displayText2");
+        if(ele.style.display == "block") {
+                ele.style.display = "none";
+            text.innerHTML = "Passer au vrac";
+        }
+        else {
+            ele.style.display = "block";
+            text.innerHTML = "Passer au vrac";
+        }
+    } 
+    function toggle3() {
+        var ele = document.getElementById("toggleText3");
+        var text = document.getElementById("displayText3");
+        if(ele.style.display == "block") {
+                ele.style.display = "none";
+            text.innerHTML = "des gateaux fait maison";
+        }
+        else {
+            ele.style.display = "block";
+            text.innerHTML = "des gateaux fait maison";
+        }
+    } 
+</script>
+</script>

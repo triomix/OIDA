@@ -20,86 +20,81 @@
     </head>
 <body>
 
-<div id="historique_header" style="border-bottom:3px solid #30EA9D">
+<div id="historique_header" style="border-bottom: 5px solid #EBFF00;">
     <div id="header-e1">
-        <img id="image_header" src="img/arrow_back.png" alt="Back">
+        <button name="buttonClick" onclick="callAnothePage2()"><img id="image_header" src="img/arrow_back.png" alt="Back"></button>
     </div>
     <div id="header-e2">
-        <img id="image_header" src="img/camera.png" alt="Camera">
+        <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/camera.png" alt="Camera">
+    </div> </button>
+    <div id="header-e3"> 
+        Plastique dur
     </div>
-    <div id="header-e3">
-        Bouteille verre
-    </div>
 
 </div>
 
-<div id="titre2">
-IMPACT
+<div id="titre2" style="margin-bottom: 25px;">
+IMPACTS
 </div>
 
 <div id="titre2">
-Où ça va ?
+Où ça va ? 
 </div>
 
 <div id="advices_block">
-    <p> 1. centre de tri Paprec (Chassieu)
-<br/><a>en savoir plus ></a> </p>
-    <p> 2. Centre de recyclage
-    <br/><a>en savoir plus ></a></p>
+    <p> 1. Centre d'incinération de Bron </p>
+    <p> 2. Océan </p>
 </div>
 
+
+
+<div class="trait_dessus"><hr></div> 
 <div id="titre2">
-Qu'est ce que ça devient ?
+Et en détails ?  
 </div>
-<div id="advices_block">
-  <img src="img/bouteilleverre.png" style="height:100px; float: right; margin-right:30px; margin-left:auto; top:-10px;">
-  <p style="float:left; margin-left:30px;"> 1 kg recyclé</p>
-  <p style="font-size: 50px; font-weight:700;">=</p>
-
+<div id="details_block"> 
+    Le PEHD est un plastique solide et opaque, résistant aux produits chimiques et aux acides. Il est
+généralement utilisé pour fabriquer les bouteilles de shampoing, produits ménagers ou bouteilles de
+lait.
 </div>
-
-<div id="titre2">
-Pourquoi recycler ?
-</div>
-
-<div id="advices_block">
-    <p> Tu sauves des tortues <br/> Tu économises nos ressources  </p>
-</div>
-
-<div id="titre2">
-Et en détails ?
-</div>
-<p id="details_block">Le verre est un matériau fabriqué par la fonte à 1500°C du sable (ou plus précisément de la silice qu’il contient).</p>
-
 <div id="advices_block">
     <p style="font-weight: bold;"> empreinte carbone </p>
     <p> en CO2eq / kg  </p>
-    <img id="poubelle" src="img/poubelle.svg" align="left" style="left:70%; top:-5px;">
+    <img id="poubelle" src="img/poubelle.svg" align="left" style="left:30%; top:-5px;">
     <div id="gauge"></div>
     <div id="details_block">
-        La contribution à l‘effet de serre des emballages en verre est conséquente, car chaque emballage est lourd et demande donc beaucoup d’énergie lors de sa production.
-    </div>
+    Le plastique est fabriqué à partir de pétrole mais il permet de fabriquer des contenants solides et léger, d’où un impact carbone faible (une bouteille de lait vide pèse 30g contre)
 </div>
-
 
 <div id="advices_block">
     <p style="font-weight: bold;"> biodiversité </p>
     <p> Quel impact sur les animaux ?  </p>
-    <img id="poubelle" src="img/poubelle.svg" align="left" style="left:20%; top:-5px;">
+    <img id="poubelle" src="img/poubelle.svg" align="left" style="left:90%; top:-5px;">
     <div id="gauge"></div>
     <div id="details_block">
-        L’impact sur la biodiversité est plutôt faible car même si le verre rejeté dans la nature reste dans l’environnement sur le long terme il est faiblement toxique lors de sa décomposition.
-    </div>
-</div>
+    Le PEHD met plusieurs dizaines d’années à se détoriorer dans l’environnement. Il se dégrade notamment en micro particules de plastiques qui terminent dans les sols, les nappes phréatiques et les océans lorsqu’il est enfoui ou rejeté directement dans la nature. Il a donc un impact fort sur la biodiversité.
 
+</div>
 
 <div id="advices_block">
     <p style="font-weight: bold;"> recyclabilité </p>
     <p> Combien de fois cela se recycle ?  </p>
-    <img id="poubelle" src="img/poubelle.svg" align="left" style="left:35%; top:-5px;">
+    <img id="poubelle" src="img/poubelle.svg" align="left" style="left:90%; top:-5px;">
     <div id="gauge"></div>
     <div id="details_block">
-        Le verre est théoriquement recyclable à 100% mais demande une certaine quantité d’énergie pour le refondre, ce qui place le verre dans une catégorie de recyclabilité médiocre.
-    </div>
+    Le PEHD n’est pas recyclé dans la métropole du grand Lyon. Il a donc la pire note en terme de recyclabilité.
 </div>
-<div><br/><br/><br/></div>
+
+</div>
+</body>
+
+<script type="text/javascript">
+    function callAnothePage()
+     {
+        window.location = "index.html";
+     }
+     function callAnothePage2()
+     {
+        window.location = "gateau.html";
+     }
+</script>
