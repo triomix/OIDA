@@ -55,6 +55,7 @@ const app = new Vue({
         numFour:0,
         numFive: 0,
         numSix:0,
+        videoSecondValue: ""
     },
     methods:{
         init:function() {
@@ -69,19 +70,8 @@ const app = new Vue({
                     
         addButtonListeners:function() {
 
-          // video start
-          document.querySelector("#start-video").addEventListener("click", this.startVideo, false);
-          document.querySelector("#start-video").addEventListener("touchend", this.startVideo, false);
-          document.querySelector('#addone').addEventListener("click", this.addOne, false);
-          document.querySelector('#addtwo').addEventListener("click", this.addTwo, false);
-          document.querySelector('#addthree').addEventListener("click", this.addThree, false);
-          document.querySelector('#addfour').addEventListener("click", this.addFour, false);
-          document.querySelector('#addfive').addEventListener("click", this.addFive, false);
-          document.querySelector('#addsix').addEventListener("click", this.addSix, false);
-
-          document.querySelector('#train').addEventListener("click", this.train, false);
+      
           document.querySelector('#predict').addEventListener("click", this.predict, false);
-          document.querySelector('#save').addEventListener("click", this.save, false);
 
         },
 
@@ -94,6 +84,7 @@ const app = new Vue({
 
           audioSelect.onchange = this.getStream;
           videoSelect.onchange = this.getStream;
+
 
         },
         handleError:function(error) {
@@ -108,22 +99,33 @@ const app = new Vue({
           var audioSelect = document.querySelector('select#audioSource');
           var videoSelect = document.querySelector('select#videoSource');
 
+          var nVideosCount = 0;
           for (var i = 0; i !== deviceInfos.length; ++i) {
             var deviceInfo = deviceInfos[i];
             var option = document.createElement('option');
             option.value = deviceInfo.deviceId;
+
+
             if (deviceInfo.kind === 'audioinput') {
               option.text = deviceInfo.label ||
                 'microphone ' + (audioSelect.length + 1);
               audioSelect.appendChild(option);
             } else if (deviceInfo.kind === 'videoinput') {
-              option.text = deviceInfo.label || 'camera ' +
-                (videoSelect.length + 1);
+              option.text = deviceInfo.label || 'camera ' + (videoSelect.length + 1);
               videoSelect.appendChild(option);
+
+              if(nVideosCount == 1)
+                this.videoSecondValue = option.value;
+
+                nVideosCount ++;
+
             } else {
               console.log('Found one other kind of source/device: ', deviceInfo);
             }
           }
+
+          this.getStream();
+
         },
 
         getStream:function(){
@@ -136,11 +138,14 @@ const app = new Vue({
               track.stop();
             });
           }
+
+          console.log(this.videoSecondValue)
+
         
           var constraints = {
             
             video: {
-              deviceId: {exact: videoSelect.value}
+              deviceId: {exact: this.videoSecondValue}
             }
           };
 
