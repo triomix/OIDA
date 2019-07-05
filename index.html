@@ -37,9 +37,8 @@
     
 
         <div class="container" id="app">
-            App super startus: {{ status }}
 
-            <div class="row">
+            <div class="row" style="visibility: hidden;"  >
                 <div class="col-sm">
 
                     <div class="select">
@@ -62,19 +61,13 @@
 
             <div class="row" style="margin-bottom: 60px">
 
-                <button  class="btn btn-large btn-primary mr-1" id="addone">Add one</button>
-                <button  class="btn btn-large btn-primary mr-1" id="addtwo">Add two</button>
-                <button  class="btn btn-large btn-primary mr-1" id="addthree">Add three</button>
-                <button  class="btn btn-large btn-primary mr-1" id="addfour">Add four</button>
-                <button  class="btn btn-large btn-primary mr-1" id="addfive">Add five</button>
-                <button  class="btn btn-large btn-primary mr-1" id="addsix">Add six</button>
+                <button  class="btn btn-large btn-danger mr-1" id="predict">predict</button>
+
             </div>
             <div class="row">
-                <button  class="btn btn-large btn-warning mr-1" id="train">train</button>
-                <button  class="btn btn-large btn-danger mr-1" id="predict">predict</button>
-                <button  class="btn btn-large btn-info" id="save">save</button>
+               
                 <button name="buttonClick" onclick="callAnothePage()">Historique</button>
-            <button name="buttonClick" onclick="callAnothePage2()">Bouteille PET</button>
+             <button name="buttonClick" onclick="callAnothePage2()">Bouteille PET</button>
             </div>
 
             <div id="text"></div>
@@ -88,7 +81,6 @@
         <script type="text/javascript" src="js/ml5.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
 
-        <script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"></script>      
       <script type="text/javascript" charset="utf-8">
 
          function onLoad()
