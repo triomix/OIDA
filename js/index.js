@@ -48,7 +48,7 @@ const app = new Vue({
         status:false,
         classifier: null,
         featureExtractor: null,
-        isBrowser:true,
+        isBrowser:false,
         numOne: 0,
         numTwo:0
     },

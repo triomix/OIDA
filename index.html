@@ -58,7 +58,8 @@
             <button id="train">train</button>
             <button id="predict">predict</button>
             <button id="save">save</button>
-
+            <button name="buttonClick" onclick="callAnothePage()">Historique</button>
+            <button name="buttonClick" onclick="callAnothePage2()">Bouteille PET</button>
             <div id="text"></div>
 
         </div>
@@ -67,6 +68,31 @@
         <script type="text/javascript" src="js/ml5.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"></script>      
+      <script type="text/javascript" charset="utf-8">
+
+         function onLoad()
+         {
+              document.addEventListener("deviceready", onDeviceReady, true);
+         }
+
+         function onDeviceReady()
+         {
+              // navigator.notification.alert("PhoneGap is working");
+         }
+
+         function callAnothePage()
+         {
+            window.location = "historique.html";
+         }
+         function callAnothePage2()
+         {
+            window.location = "bouteille_PET.html";
+         }
+
+
+      </script>
 
     </body>
 </html>

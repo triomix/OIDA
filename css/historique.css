@@ -1,0 +1,78 @@
+/* Historique */ 
+
+#historique_header {
+    position: relative;
+    width: 100%;
+    height: 42px;
+    background: #FFFFFF;
+    margin-bottom: 1px;
+    border-bottom: 5px solid #88D4FF;
+}
+
+#header-e1 {
+    float: left;
+    width: 42px;
+    height: 42px;
+    padding-top: 10px;
+}
+
+#header-e2 {
+    float: right;
+    width: 42px;
+    height: 42px;
+    padding-top: 10px;
+}
+
+#header-e3 {
+    float: center;
+    overflow: hidden;
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: normal;
+    /* identical to box height */
+    text-align: center;
+    padding-top: 12px;
+    font-size: 16px;
+    text-transform:uppercase;
+}
+
+#titre {
+    position: relative;
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    margin: auto;
+    width: 50%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+    text-transform:uppercase;
+}
+
+#image_header {
+    height:28px
+    width:auto;/*maintain aspect ratio*/
+    max-width:28px;
+}
+
+#historique_table {
+    position: relative;
+    width: 100%;
+    background: #FFFFFF;
+
+}
+
+td {
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    padding-left: 4px;
+    border-bottom: 3px solid #88D4FF;
+    height: 60px;
+}
+
+.

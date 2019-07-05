@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+
+        <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src ‘self’ gap://ready file://* *;  style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.storage.googleapis.com ">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/details.css">
+        <title>OIDA</title>
+    </head>
+<body>
+    
+
+<div id="historique_header">
+	<div id="header-e1">
+	    <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/arrow_back.png" alt="Back"></button>
+	</div>
+    <div id="header-e2">
+        <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/camera.png" alt="Camera"></button>
+    </div>  
+    <div id="header-e3"> 
+        Bouteille PET
+    </div>
+
+</div>
+
+<div id="poubelle_jaune">
+    <div>
+        <img id="image_title" src="img/yellow_bin.png" align="left" style="margin-top: 20px">
+        <p id="titre" style="padding-top: 20px;">Poubelle</p>
+        <p id="titre">Jaune</p>
+    </div>  
+    <div>
+    <video width="320" height="240" controls>
+        <source src="img/video_test.mp4" type="video/mp4">
+    </video>
+    </div>
+    <div id="advices_block">
+        <p> vider </p>
+        <p> aplatir </p>
+        <p> ne pas rincer </p>
+    </div>
+    <div>
+        <img id="image_location" src="img/location.png" align="left" style="margin-top: 20px">
+        <p id="advices" style="padding-top: 20px;">une poubelle dans chaque immeuble</p>
+        <p id="advices" style="padding-bottom: 20px;">des silos dans l'espace public</p>
+    </div> 
+
+</div>
+
+
+<div id="impacts"> 
+    <button name="buttonClick" onclick="callAnothePage3()"><p id="impacts_titre"> impacts > </p></button>   
+    <div id="gauge">
+    </div> 
+</div>
+
+<div id="impacts"> 
+    <button name="buttonClick" onclick="callAnothePage4()"><p id="impacts_titre"> antidotes > </p></button>
+</div>
+
+</body>
+<script type="text/javascript">
+    function callAnothePage()
+     {
+        window.location = "index.html";
+     }
+     function callAnothePage3()
+     {
+        window.location = "details_PET.html";
+     }
+     function callAnothePage4()
+     {
+        window.location = "antidotes_PET.html";
+     }
+</script>
