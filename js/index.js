@@ -201,7 +201,6 @@ const app = new Vue({
         },
         predict:function() {
           document.querySelector('#text').innerText = "Predicting...";
-
           this.classifier.classify(this.gotResults);
         },
 
@@ -209,8 +208,10 @@ const app = new Vue({
           // Display any error
           if (err) {
             console.error(err);
+            return;
           }
           if (results && results[0]) {
+
             console.log(results[0].label);
             document.querySelector('#text').innerText = "Result! " + results[0].label + " " + results[0].confidence;
 

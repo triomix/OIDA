@@ -1,46 +1,4 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
 
-function modelLoaded() {
-    console.log('Model loaded!');
-}
-// Predict the current frame.
-function predict() {
-    classifier.predict(gotResults);
-}
-
-
-
-
-// Show the results
-function gotResults(err, results) {
-    // Display any error
-    if (err) {
-        console.error(err);
-    }
-    if (results && results[0]) {
-        result.innerText = results[0].label;
-        confidence.innerText = results[0].confidence;
-        classifier.classify(gotResults);
-        console.log(results[0].label);
-    }
-}
 
 const app = new Vue({
     el:'#app',
@@ -62,8 +20,6 @@ const app = new Vue({
             this.status = true;
             this.addButtonListeners();
             this.populateSources();
-           // this.startClassifier();
-
             document.querySelector('#text').innerText = "hello";
         },
                     
@@ -146,11 +102,9 @@ const app = new Vue({
 
           document.querySelector('#text').innerText = "Asking permission";
 
-          navigator.mediaDevices.getUserMedia(constraints).
-            then(this.gotStream).catch(this.handleError);
-
-            
-            this.startClassifier();
+          navigator.mediaDevices.getUserMedia(constraints).then(this.gotStream).catch(this.handleError);
+      
+          this.startClassifier();
 
         }, 
         
@@ -165,34 +119,7 @@ const app = new Vue({
         startVideo:function() {
 
           this.getStream();
-          return;
-                    
-          console.log("Starting video capture");
-          document.querySelector('#text').innerText = "Starting video capture";
-          var video = document.getElementById('video');
-          const constraints = {
-            video: {
-              deviceId: {exact: 1}
-            }
-        };
-
-          if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: constraints }).then(stream => {
-              video.srcObject = stream;
-              //video.play();
-            });
-          } else {
-            console.log("what the fuck");
-            
-          }
-          /*
-          var srcType = Camera.PictureSourceType.CAMERA;
-          var options = this.setVideoOptions(srcType);            
-          navigator.camera.getPicture(this.onVideoSuccess, this.onVideoError, options);
-          */
-          // Create a webcam capture
-          this.startClassifier();
-
+          
         },
         play:function() {
           var video = document.getElementById('video');
@@ -216,79 +143,6 @@ const app = new Vue({
 
         },
 
-        onVideoSuccess:function(imageUri) {
-            console.log("Video capture sucess");
-            console.log("imageUri" + imageUri);
-            this.displayImage(imageUri);
-        },
-        onVideoError:function() {
-          console.log("Unable to obtain picture: " + error, "app");
-        },
-        displayImage:function(imgUri) {
-
-          /*
-          if(!this.isBrowser) {
-            console.log("Display Image");
-          let elem = document.getElementById('image');
-            elem.src = imgUri;
-
-          } else {
-            
-            var canvas = document.getElementById("canvas");
-            var ctx = canvas.getContext("2d");
-
-            var image = new Image();
-            image.onload = function() {
-              ctx.drawImage(image, 0, 0);
-            };
-            image.src = "data:image/jpg;base64,"+imgUri;
-
-            this.classifier.addImage(image, 'one');
-            this.classifier.addImage(image, 'one');
-            this.classifier.addImage(image, 'one');
-
-            this.classifier.train();
-            this.classifier.classify(image, (err, result) => {
-
-              if (err)  
-                console.log(err);
-                else {
-              // this should be labels
-              console.log('rating: ' + result);
-                }
-            
-            });
-
-           // image.src = imgUri;
-          }
-
-
-         // this.train();
-
-        
-
-          /*
-          var canvas = document.getElementById("canvas");
-          var ctx = canvas.getContext("2d");
-
-          var image = new Image();
-          image.onload = function() {
-            ctx.drawImage(image, 0, 0);
-          };
-          i//mage.src = "data:image/jpg;base64,"+imgUri;
-          image.src = imgUri;
-
-          */
-
-          /*
-          this.classifier.addImage(image, 'one', function() {
-            console.log("all done");
-          });
-
-          */
-
-        },
-
         startClassifier:function() {
 
           document.querySelector('#text').innerText = "Loading model";
@@ -302,7 +156,7 @@ const app = new Vue({
         },
         modelLoaded:function() {
           console.log('Model loaded!');
-          document.querySelector('#text').innerText = "Model loaded ????";
+          document.querySelector('#text').innerText = "Model loaded"
           //this.classifier.load("models/model.json", this.customModelLoaded);
         },
 
