@@ -59,6 +59,7 @@
 
             <video id="video" width="640" height="480" autoplay  webkit-playsinline="true" playsinline="true"></video>
 
+
             <div class="row" style="margin-bottom: 60px">
 
                 <button  class="btn btn-large btn-primary mr-1" id="addone">Add one</button>
@@ -72,6 +73,8 @@
                 <button  class="btn btn-large btn-warning mr-1" id="train">train</button>
                 <button  class="btn btn-large btn-danger mr-1" id="predict">predict</button>
                 <button  class="btn btn-large btn-info" id="save">save</button>
+                <button name="buttonClick" onclick="callAnothePage()">Historique</button>
+            <button name="buttonClick" onclick="callAnothePage2()">Bouteille PET</button>
             </div>
 
             <div id="text"></div>
@@ -84,6 +87,31 @@
         <script type="text/javascript" src="js/vue.min.js"></script>
         <script type="text/javascript" src="js/ml5.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+
+        <script type="text/javascript" charset="utf-8" src="cordova-x.x.x.js"></script>      
+      <script type="text/javascript" charset="utf-8">
+
+         function onLoad()
+         {
+              document.addEventListener("deviceready", onDeviceReady, true);
+         }
+
+         function onDeviceReady()
+         {
+              // navigator.notification.alert("PhoneGap is working");
+         }
+
+         function callAnothePage()
+         {
+            window.location = "historique.html";
+         }
+         function callAnothePage2()
+         {
+            window.location = "bouteille_PET.html";
+         }
+
+
+      </script>
 
     </body>
 </html>

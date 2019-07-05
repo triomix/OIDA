@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+
+        <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src ‘self’ gap://ready file://* *;  style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.storage.googleapis.com ">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/historique.css">
+        <title>OIDA</title>
+    </head>
+<body>
+    
+
+<div id="historique_header">
+	<div id="header-e1">
+	    <img id="image_header" src="img/arrow_back.png" alt="Back">
+	</div>
+    <div id="header-e2">
+        <img id="image_header" src="img/camera.png" alt="Camera">
+    </div>  
+    <div id="header-e3"> 
+        Historique
+    </div>
+
+</div>
+
+<div id="titre">
+Mes scans
+</div>
+
+
+<table id="historique_table">
+  <tr>
+    <td>PET</td>
+    <td>Hier</td> 
+    <td>></td>
+  </tr>
+  <tr>
+    <td>Verre</td>
+    <td>01/07</td> 
+    <td>></td>
+  </tr>
+  <tr>
+    <td>Carton</td>
+    <td>25/06</td> 
+    <td>></td>
+  </tr>
+</table>
+

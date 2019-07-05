@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+
+        <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src ‘self’ gap://ready file://* *;  style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.storage.googleapis.com ">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/details.css">
+        <title>OIDA</title>
+    </head>
+<body>
+
+<div id="historique_header">
+    <div id="header-e1">
+        <button name="buttonClick" onclick="callAnothePage2()"><img id="image_header" src="img/arrow_back.png" alt="Back"></button>
+    </div>
+    <div id="header-e2">
+        <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/camera.png" alt="Camera">
+    </div> </button>
+    <div id="header-e3"> 
+        Bouteille PET
+    </div>
+
+</div>
+
+<div id="titre2">
+MES SCANS
+</div>
+
+<div id="titre2">
+Où ça va ? 
+</div>
+
+<div id="advices_block">
+    <p> 1. Centre de tri de [] </p>
+    <p> 2. Centre de recyclage en Chine </p>
+</div>
+
+<div id="titre2">
+Qu'est ce que ça devient ?  
+</div>
+
+<div id="titre2">
+Pourquoi recycler ? 
+</div>
+
+<div id="advices_block">
+    <p> Tu sauves des tortues </p>
+    <p> Tu économises nos ressources  </p>
+</div>
+
+<div id="titre2">
+Et en détails ?  
+</div>
+
+<div id="advices_block">
+    <p style="font-weight: bold;"> empreinte carbone </p>
+    <p> en CO2eq / kg  </p>
+</div>
+<div id="gauge"></div> 
+<div id="details_block"> 
+    Bla bla bla
+</div>
+
+<div id="advices_block">
+    <p style="font-weight: bold;"> biodiversité </p>
+    <p> Quel impact sur les animaux ?  </p>
+</div>
+<div id="gauge"></div> 
+<div id="details_block"> 
+    Bla bla bla
+</div>
+
+<div id="advices_block">
+    <p style="font-weight: bold;"> recyclabilité </p>
+    <p> Combien de fois cela se recycle ?  </p>
+</div>
+<div id="gauge"></div> 
+<div id="details_block"> 
+    Bla bla bla
+</div>
+
+</div>
+</body>
+
+<script type="text/javascript">
+    function callAnothePage()
+     {
+        window.location = "index.html";
+     }
+     function callAnothePage2()
+     {
+        window.location = "bouteille_PET.html";
+     }
+</script>

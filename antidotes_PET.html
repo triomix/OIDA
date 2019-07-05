@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+
+        <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src ‘self’ gap://ready file://* *;  style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.storage.googleapis.com ">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/details.css">
+        <title>OIDA</title>
+    </head>
+<body>
+
+<div id="historique_header">
+    <div id="header-e1">
+        <button name="buttonClick" onclick="callAnothePage2()"><img id="image_header" src="img/arrow_back.png" alt="Back"></button>
+    </div>
+    <div id="header-e2">
+        <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/camera.png" alt="Camera">
+    </div> </button>
+    <div id="header-e3"> 
+        Bouteille PET
+    </div>
+
+</div>
+
+<div id="titre2">
+ANTIDOTES
+</div>
+<div id="advices_block">
+    <p> des solutions plus durables, plus écologiques et plus saines </p>
+</div>
+
+<div id="titre2">
+les alternatives
+</div>
+
+<div id="antidote"> 
+    <p style="font-weight: bold;"> l'eau du robinet </p>
+    <p> Nous avons la chance, l'eau de nos robinets est potable. Profitons-en ! </p>
+</div>
+
+<div id="antidote"> 
+    <p style="font-weight: bold;"> gourde en inox </p>
+    <p> Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour ou de mots aléatoires qui ne ressemblent pas une seconde à du texte standard. Si vous voulez utiliser un passage du Lorem Ipsum, vous devez être sûr qu'il n'y a rien d'embarrassant caché dans le texte. Tous les générateurs de Lorem Ipsum sur Internet tendent à reproduire le mê </p>
+</div>
+
+
+<div id="titre2">
+les initiatives de la communauté
+</div>
+<div id="antidote"> 
+    <p style="font-weight: bold;"> de la bouteille au vase </p>
+    <p> Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour ou de mots aléatoires qui ne ressemblent pas une seconde à du texte standard. Si vous voulez utiliser un passage du Lorem Ipsum, vous devez être sûr qu'il n'y a rien d'embarrassant caché dans le texte. Tous les générateurs de Lorem Ipsum sur Internet tendent à reproduire le mê </p>
+</div>
+
+<div id="initiative"> 
+    <p style="font-weight: bold;"> Ajouter mon initiative </p>
+</div>
+</body>
+
+<script type="text/javascript">
+    function callAnothePage()
+     {
+        window.location = "index.html";
+     }
+     function callAnothePage2()
+     {
+        window.location = "bouteille_PET.html";
+     }
+</script>
