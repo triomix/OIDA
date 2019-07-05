@@ -29,44 +29,61 @@
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
 
-        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <link rel="stylesheet" type="text/css" href="css/index.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <title>Hello World</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css" >
+        <title>Oida</title>
     </head>
     <body>
     
 
-        <div id="app">
+        <div class="container" id="app">
             App super startus: {{ status }}
 
-            <button id="start-video">Take Video</button>
+            <div class="row">
+                <div class="col-sm">
 
-            <div class="select">
-                <label for="audioSource">Audio source: </label><select id="audioSource"></select>
+                    <div class="select">
+                        <label for="audioSource">Audio source: </label><select id="audioSource"></select>
+                    </div>
+        
+                    <div class="select">
+                        <label for="videoSource">Video source: </label><select id="videoSource"></select>
+                    </div>
+                    <button  class="btn btn-primary mr-1" id="start-video">play</button>
+
+                    </div>
             </div>
 
-            <div class="select">
-                <label for="videoSource">Video source: </label><select id="videoSource"></select>
-            </div>
+            
 
 
             <video id="video" width="640" height="480" autoplay  webkit-playsinline="true" playsinline="true"></video>
 
-            <button id="addone">Add one</button>
-            <button id="addtwo">Add two</button>
-            <button id="train">train</button>
-            <button id="predict">predict</button>
-            <button id="save">save</button>
+            <div class="row" style="margin-bottom: 60px">
+
+                <button  class="btn btn-large btn-primary mr-1" id="addone">Add one</button>
+                <button  class="btn btn-large btn-primary mr-1" id="addtwo">Add two</button>
+                <button  class="btn btn-large btn-primary mr-1" id="addthree">Add three</button>
+                <button  class="btn btn-large btn-primary mr-1" id="addfour">Add four</button>
+                <button  class="btn btn-large btn-primary mr-1" id="addfive">Add five</button>
+                <button  class="btn btn-large btn-primary mr-1" id="addsix">Add six</button>
+            </div>
+            <div class="row">
+                <button  class="btn btn-large btn-warning mr-1" id="train">train</button>
+                <button  class="btn btn-large btn-danger mr-1" id="predict">predict</button>
+                <button  class="btn btn-large btn-info" id="save">save</button>
+            </div>
 
             <div id="text"></div>
 
         </div>
         <!--<script type="text/javascript" src="cordova.js"></script>-->
+        <script src="js/jquery-3.3.1.js"></script>
+        <script src="js/bootstrap.min.js" ></script>
+
         <script type="text/javascript" src="js/vue.min.js"></script>
         <script type="text/javascript" src="js/ml5.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     </body>
 </html>

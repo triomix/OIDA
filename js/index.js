@@ -50,7 +50,11 @@ const app = new Vue({
         featureExtractor: null,
         isBrowser:true,
         numOne: 0,
-        numTwo:0
+        numTwo:0,
+        numThree: 0,
+        numFour:0,
+        numFive: 0,
+        numSix:0,
     },
     methods:{
         init:function() {
@@ -58,7 +62,7 @@ const app = new Vue({
             this.status = true;
             this.addButtonListeners();
             this.populateSources();
-            this.startClassifier();
+           // this.startClassifier();
 
             document.querySelector('#text').innerText = "hello";
         },
@@ -70,6 +74,10 @@ const app = new Vue({
           document.querySelector("#start-video").addEventListener("touchend", this.startVideo, false);
           document.querySelector('#addone').addEventListener("click", this.addOne, false);
           document.querySelector('#addtwo').addEventListener("click", this.addTwo, false);
+          document.querySelector('#addthree').addEventListener("click", this.addThree, false);
+          document.querySelector('#addfour').addEventListener("click", this.addFour, false);
+          document.querySelector('#addfive').addEventListener("click", this.addFive, false);
+          document.querySelector('#addsix').addEventListener("click", this.addSix, false);
 
           document.querySelector('#train').addEventListener("click", this.train, false);
           document.querySelector('#predict').addEventListener("click", this.predict, false);
@@ -78,22 +86,24 @@ const app = new Vue({
         },
 
         populateSources:function() {
+
           var audioSelect = document.querySelector('select#audioSource');
           var videoSelect = document.querySelector('select#videoSource');
 
-          navigator.mediaDevices.enumerateDevices().then(this.gotDevices).then(this.getStream).catch(this.handleError);
+          navigator.mediaDevices.enumerateDevices().then(this.gotDevices).catch(this.handleError);
 
           audioSelect.onchange = this.getStream;
           videoSelect.onchange = this.getStream;
+
         },
         handleError:function(error) {
+
           console.log('Error: ', error);
           document.querySelector('#text').innerText = error;
 
         },
 
         gotDevices:function(deviceInfos) {
-
 
           var audioSelect = document.querySelector('select#audioSource');
           var videoSelect = document.querySelector('select#videoSource');
@@ -128,28 +138,34 @@ const app = new Vue({
           }
         
           var constraints = {
-            audio: {
-              deviceId: {exact: audioSelect.value}
-            },
+            
             video: {
               deviceId: {exact: videoSelect.value}
             }
           };
-          document.querySelector('#text').innerText = "GET video";
+
+          document.querySelector('#text').innerText = "Asking permission";
 
           navigator.mediaDevices.getUserMedia(constraints).
             then(this.gotStream).catch(this.handleError);
+
+            
+            this.startClassifier();
+
         }, 
         
         gotStream:function(stream) {
-          window.stream = stream; // make stream available to console
 
+          window.stream = stream; // make stream available to console
           var video = document.getElementById('video');
           video.srcObject = stream;
 
         },
 
         startVideo:function() {
+
+          this.getStream();
+          return;
                     
           console.log("Starting video capture");
           document.querySelector('#text').innerText = "Starting video capture";
@@ -275,16 +291,19 @@ const app = new Vue({
 
         startClassifier:function() {
 
+          document.querySelector('#text').innerText = "Loading model";
+
           this.featureExtractor = ml5.featureExtractor('MobileNet', this.modelLoaded);
+          this.featureExtractor.numClasses = 4;
           var video = document.getElementById('video');
-          this.classifier = this.featureExtractor.classification(video, this.videoReady);
+          this.classifier = this.featureExtractor.classification(video, { epochs:30, learningRate: 0.001, numLabels: 4 }, this.videoReady);
 
 
         },
         modelLoaded:function() {
           console.log('Model loaded!');
-          document.querySelector('#text').innerText = "Model loaded";
-          this.classifier.load("models/model.json", this.customModelLoaded);
+          document.querySelector('#text').innerText = "Model loaded ????";
+          //this.classifier.load("models/model.json", this.customModelLoaded);
         },
 
         customModelLoaded:function() {
@@ -308,6 +327,8 @@ const app = new Vue({
           });
         },
         predict:function() {
+          document.querySelector('#text').innerText = "Predicting...";
+
           this.classifier.classify(this.gotResults);
         },
 
@@ -318,23 +339,51 @@ const app = new Vue({
           }
           if (results && results[0]) {
             console.log(results[0].label);
-            document.querySelector('#text').innerText = "Result! " + results[0].label;
+            document.querySelector('#text').innerText = "Result! " + results[0].label + " " + results[0].confidence;
           //  confidence.innerText = results[0].confidence;
           //this.classifier.classify(gotResults);
           }
         },
 
         addOne:function() {
-          this.classifier.addImage('one');
+          this.classifier.addImage('first');
           this.numOne++;
-          document.querySelector('#text').innerText = "Add one ! " + this.numOne;
+          document.querySelector('#text').innerText = "Add first ! " + this.numOne;
 
 
         },
         addTwo:function() {
-          this.classifier.addImage('two');
+          this.classifier.addImage('second');
           this.numTwo++;
           document.querySelector('#text').innerText = "add two !" + this.numTwo;
+
+
+        },
+        addThree:function() {
+          this.classifier.addImage('third');
+          this.numThree++;
+          document.querySelector('#text').innerText = "Add three ! " + this.numThree;
+
+
+        },
+        addFour:function() {
+          this.classifier.addImage('four');
+          this.numFour++;
+          document.querySelector('#text').innerText = "add four !" + this.numFour;
+
+
+        },
+        addFive:function() {
+          this.classifier.addImage('five');
+          this.numFive++;
+          document.querySelector('#text').innerText = "Add five ! " + this.numFive;
+
+
+        },
+        addSix:function() {
+          this.classifier.addImage('six');
+          this.numSix++;
+          document.querySelector('#text').innerText = "add six !" + this.numSix;
 
 
         },
@@ -347,95 +396,5 @@ const app = new Vue({
 
 
 
-/*
-//----------- ML stuff
-// Grab all the DOM elements
-var video = document.getElementById('video');
-var videoStatus = document.getElementById('videoStatus');
-var loading = document.getElementById('loading');
-var catButton = document.getElementById('catButton');
-var dogButton = document.getElementById('dogButton');
-var amountOfCatImages = document.getElementById('amountOfCatImages');
-var amountOfDogImages = document.getElementById('amountOfDogImages');
-var train = document.getElementById('train');
-var loss = document.getElementById('loss');
-var result = document.getElementById('result');
-var confidence = document.getElementById('confidence');
-var predict = document.getElementById('predict');
 
-// A variable to store the total loss
-let totalLoss = 0;
-
-// Create a webcam capture
-navigator.mediaDevices.getUserMedia({ video: true })
-  .then((stream) => {
-    video.srcObject = stream;
-    video.play();
-  })
-
-// A function to be called when the model has been loaded
-function modelLoaded() {
-  loading.innerText = 'Model loaded!';
-}
-
-
-
-// Predict the current frame.
-function predict() {
-  classifier.predict(gotResults);
-}
-
-// A function to be called when the video is finished loading
-function videoReady() {
-  videoStatus.innerText = 'Video ready!';
-}
-
-// When the Cat button is pressed, add the current frame
-// from the video with a label of cat to the classifier
-catButton.onclick = function () {
-  classifier.addImage('cat');
-  amountOfCatImages.innerText = Number(amountOfCatImages.innerText) + 1;
-}
-
-// When the Cat button is pressed, add the current frame
-// from the video with a label of cat to the classifier
-dogButton.onclick = function () {
-  classifier.addImage('dog');
-  amountOfDogImages.innerText = Number(amountOfDogImages.innerText) + 1;
-}
-
-// When the train button is pressed, train the classifier
-// With all the given cat and dog images
-train.onclick = function () {
-  classifier.train(function(lossValue) {
-    if (lossValue) {
-      totalLoss = lossValue;
-      loss.innerHTML = 'Loss: ' + totalLoss;
-    } else {
-      loss.innerHTML = 'Done Training! Final Loss: ' + totalLoss;
-    }
-  });
-}
-
-// Show the results
-function gotResults(err, results) {
-  // Display any error
-  if (err) {
-    console.error(err);
-  }
-  if (results && results[0]) {
-    result.innerText = results[0].label;
-    confidence.innerText = results[0].confidence;
-    classifier.classify(gotResults);
-  }
-}
-
-// Start predicting when the predict button is clicked
-predict.onclick = function () {
-  classifier.classify(gotResults);
-}
-
-*/
-
-//document.addEventListener('deviceready', app.init);
 app.init();
