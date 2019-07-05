@@ -54,7 +54,7 @@
 
 
 <div class="impacts">
-    <p class="impacts_titre"> impacts > </p>
+    <button name="buttonClick" onclick="callAnothePage3()"><p class="impacts_titre"> impacts > </p></button>
     <img id="tortuecontente" align="left" src="img/tortuecontente.svg">
     <img id="tortuemalade" align="right" src="img/tortuemalade.svg">
     <img id="poubelle" align="left" src="img/poubelle.svg">
@@ -67,3 +67,18 @@
   <p class="impacts_titre"> antidotes > </p>
   <img id="tortuemedecin" src="img/tortuemedecin.svg">
 </div>
+
+<script type="text/javascript">
+    function callAnothePage()
+     {
+        window.location = "index.html";
+     }
+     function callAnothePage3()
+     {
+        window.location = "details_verre.html";
+     }
+     function callAnothePage4()
+     {
+        window.location = "antidote_verre.html";
+     }
+</script>
