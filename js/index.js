@@ -1,47 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-
-function modelLoaded() {
-    console.log('Model loaded!');
-}
-// Predict the current frame.
-function predict() {
-    classifier.predict(gotResults);
-}
-
-
-
-
-// Show the results
-function gotResults(err, results) {
-    // Display any error
-    if (err) {
-        console.error(err);
-    }
-    if (results && results[0]) {
-        result.innerText = results[0].label;
-        confidence.innerText = results[0].confidence;
-        classifier.classify(gotResults);
-        console.log(results[0].label);
-    }
-}
-
 const app = new Vue({
     el:'#app',
     data:{
@@ -49,29 +5,46 @@ const app = new Vue({
         classifier: null,
         featureExtractor: null,
         isBrowser:false,
-        numOne: 0,
-        numTwo:0,
-        numThree: 0,
-        numFour:0,
-        numFive: 0,
-        numSix:0,
-        videoSecondValue: ""
+        videoSecondValue: "",
+        currentPage:null,
+        pages: [
+          {
+            label:"first",
+            url:"google.com",
+            name:"ahou"
+          },
+          {
+            label:"second",
+            url:"google.com",
+            name:"ahou"
+          },
+          {
+            label:"third",
+            url:"google.com",
+            name:"ahou"
+          },
+          {
+            label:"four",
+            url:"google.com",
+            name:"ahou"
+          }
+        ]
     },
     methods:{
+
         init:function() {
 
             this.status = true;
             this.addButtonListeners();
             this.populateSources();
-           // this.startClassifier();
 
-            document.querySelector('#text').innerText = "hello";
         },
                     
         addButtonListeners:function() {
 
-      
           document.querySelector('#predict').addEventListener("click", this.predict, false);
+          document.querySelector('#retry').addEventListener("click", this.retry, false);
+          document.querySelector("#result").addEventListener("click", this.showPage, false);
 
         },
 
@@ -101,10 +74,10 @@ const app = new Vue({
 
           var nVideosCount = 0;
           for (var i = 0; i !== deviceInfos.length; ++i) {
+
             var deviceInfo = deviceInfos[i];
             var option = document.createElement('option');
             option.value = deviceInfo.deviceId;
-
 
             if (deviceInfo.kind === 'audioinput') {
               option.text = deviceInfo.label ||
@@ -120,7 +93,7 @@ const app = new Vue({
                 nVideosCount ++;
 
             } else {
-              console.log('Found one other kind of source/device: ', deviceInfo);
+             // console.log('Found one other kind of source/device: ', deviceInfo);
             }
           }
 
@@ -130,17 +103,11 @@ const app = new Vue({
 
         getStream:function(){
 
-          var audioSelect = document.querySelector('select#audioSource');
-          var videoSelect = document.querySelector('select#videoSource');
-
           if (window.stream) {
             window.stream.getTracks().forEach(function(track) {
               track.stop();
             });
           }
-
-          console.log(this.videoSecondValue)
-
         
           var constraints = {
             
@@ -151,11 +118,9 @@ const app = new Vue({
 
           document.querySelector('#text').innerText = "Asking permission";
 
-          navigator.mediaDevices.getUserMedia(constraints).
-            then(this.gotStream).catch(this.handleError);
-
-            
-            this.startClassifier();
+          navigator.mediaDevices.getUserMedia(constraints).then(this.gotStream).catch(this.handleError);
+  
+          this.startClassifier();
 
         }, 
         
@@ -170,34 +135,7 @@ const app = new Vue({
         startVideo:function() {
 
           this.getStream();
-          return;
-                    
-          console.log("Starting video capture");
-          document.querySelector('#text').innerText = "Starting video capture";
-          var video = document.getElementById('video');
-          const constraints = {
-            video: {
-              deviceId: {exact: 1}
-            }
-        };
-
-          if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: constraints }).then(stream => {
-              video.srcObject = stream;
-              //video.play();
-            });
-          } else {
-            console.log("what the fuck");
-            
-          }
-          /*
-          var srcType = Camera.PictureSourceType.CAMERA;
-          var options = this.setVideoOptions(srcType);            
-          navigator.camera.getPicture(this.onVideoSuccess, this.onVideoError, options);
-          */
-          // Create a webcam capture
-          this.startClassifier();
-
+         
         },
         play:function() {
           var video = document.getElementById('video');
@@ -220,80 +158,6 @@ const app = new Vue({
           return options;
 
         },
-
-        onVideoSuccess:function(imageUri) {
-            console.log("Video capture sucess");
-            console.log("imageUri" + imageUri);
-            this.displayImage(imageUri);
-        },
-        onVideoError:function() {
-          console.log("Unable to obtain picture: " + error, "app");
-        },
-        displayImage:function(imgUri) {
-
-          /*
-          if(!this.isBrowser) {
-            console.log("Display Image");
-          let elem = document.getElementById('image');
-            elem.src = imgUri;
-
-          } else {
-            
-            var canvas = document.getElementById("canvas");
-            var ctx = canvas.getContext("2d");
-
-            var image = new Image();
-            image.onload = function() {
-              ctx.drawImage(image, 0, 0);
-            };
-            image.src = "data:image/jpg;base64,"+imgUri;
-
-            this.classifier.addImage(image, 'one');
-            this.classifier.addImage(image, 'one');
-            this.classifier.addImage(image, 'one');
-
-            this.classifier.train();
-            this.classifier.classify(image, (err, result) => {
-
-              if (err)  
-                console.log(err);
-                else {
-              // this should be labels
-              console.log('rating: ' + result);
-                }
-            
-            });
-
-           // image.src = imgUri;
-          }
-
-
-         // this.train();
-
-        
-
-          /*
-          var canvas = document.getElementById("canvas");
-          var ctx = canvas.getContext("2d");
-
-          var image = new Image();
-          image.onload = function() {
-            ctx.drawImage(image, 0, 0);
-          };
-          i//mage.src = "data:image/jpg;base64,"+imgUri;
-          image.src = imgUri;
-
-          */
-
-          /*
-          this.classifier.addImage(image, 'one', function() {
-            console.log("all done");
-          });
-
-          */
-
-        },
-
         startClassifier:function() {
 
           document.querySelector('#text').innerText = "Loading model";
@@ -312,8 +176,12 @@ const app = new Vue({
         },
 
         customModelLoaded:function() {
+
           console.log('Custom Model loaded!');
           document.querySelector('#text').innerText = "Custom loaded";
+          // model is loaded so now show button
+          document.getElementById("predict").style.visibility = "visible";
+
 
         },
         videoReady:function() {
@@ -333,7 +201,6 @@ const app = new Vue({
         },
         predict:function() {
           document.querySelector('#text').innerText = "Predicting...";
-
           this.classifier.classify(this.gotResults);
         },
 
@@ -341,65 +208,52 @@ const app = new Vue({
           // Display any error
           if (err) {
             console.error(err);
+            return;
           }
           if (results && results[0]) {
+
             console.log(results[0].label);
             document.querySelector('#text').innerText = "Result! " + results[0].label + " " + results[0].confidence;
-          //  confidence.innerText = results[0].confidence;
-          //this.classifier.classify(gotResults);
+
+            // show buttons
+            document.getElementById("predict-container").style.display = "none";
+            document.getElementById("results").style.visibility = "visible";
+
+            var page = this.getPageForLabel(results[0].label);
+            document.getElementById("result").innerText = "C'est un " + page.name;
+
+            this.currentPage = page;
+
+
           }
         },
 
-        addOne:function() {
-          this.classifier.addImage('first');
-          this.numOne++;
-          document.querySelector('#text').innerText = "Add first ! " + this.numOne;
+        getPageForLabel:function(label) {
 
-
-        },
-        addTwo:function() {
-          this.classifier.addImage('second');
-          this.numTwo++;
-          document.querySelector('#text').innerText = "add two !" + this.numTwo;
-
+          for(var i=0; i<this.pages.length; i++) {
+            if(pages[i].label == label)
+            return pages[i];
+          }
 
         },
-        addThree:function() {
-          this.classifier.addImage('third');
-          this.numThree++;
-          document.querySelector('#text').innerText = "Add three ! " + this.numThree;
 
+        retry:function () {
 
+          this.currentPage = null;
+          document.getElementById("predict-container").style.display = "grid";
+          document.getElementById("results").style.visibility = "hidden";
+
+          
         },
-        addFour:function() {
-          this.classifier.addImage('four');
-          this.numFour++;
-          document.querySelector('#text').innerText = "add four !" + this.numFour;
 
+        showPage() {
 
-        },
-        addFive:function() {
-          this.classifier.addImage('five');
-          this.numFive++;
-          document.querySelector('#text').innerText = "Add five ! " + this.numFive;
+          if(this.currentPage) {
+            window.location = this.currentPage.url;
+          }
 
-
-        },
-        addSix:function() {
-          this.classifier.addImage('six');
-          this.numSix++;
-          document.querySelector('#text').innerText = "add six !" + this.numSix;
-
-
-        },
-        save:function() {
-          this.classifier.save();
         }
     }
 })
-
-
-
-
 
 app.init();
