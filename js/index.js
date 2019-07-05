@@ -9,24 +9,24 @@ const app = new Vue({
         currentPage:null,
         pages: [
           {
-            label:"first",
-            url:"google.com",
-            name:"ahou"
-          },
-          {
-            label:"second",
-            url:"google.com",
-            name:"ahou"
-          },
-          {
             label:"third",
-            url:"google.com",
-            name:"ahou"
+            url:"gateau.html",
+            name:"gateau"
+          },
+          {
+            label:"first",
+            url:"poivre.html",
+            name:"poivre"
           },
           {
             label:"four",
-            url:"google.com",
-            name:"ahou"
+            url:"bouteille.html",
+            name:"bouteille"
+          },
+          {
+            label:"second",
+            url:"canette.com",
+            name:"canette"
           }
         ]
     },
@@ -207,7 +207,7 @@ const app = new Vue({
         gotResults:function(err, results) {
           // Display any error
           if (err) {
-            console.error(err);
+            //console.error(err);
             return;
           }
           if (results && results[0]) {
@@ -220,7 +220,7 @@ const app = new Vue({
             document.getElementById("results").style.visibility = "visible";
 
             var page = this.getPageForLabel(results[0].label);
-            document.getElementById("result").innerText = "C'est un " + page.name;
+            document.getElementById("result").innerText = "Trouvé ! : " + page.name;
 
             this.currentPage = page;
 
@@ -231,8 +231,8 @@ const app = new Vue({
         getPageForLabel:function(label) {
 
           for(var i=0; i<this.pages.length; i++) {
-            if(pages[i].label == label)
-            return pages[i];
+            if(this.pages[i].label == label)
+            return this.pages[i];
           }
 
         },
