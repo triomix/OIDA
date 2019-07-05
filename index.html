@@ -33,6 +33,20 @@
         <link rel="stylesheet" href="css/bootstrap.min.css" >
         <title>Oida</title>
     </head>
+
+<div id="historique_header">
+  <div id="header-e1">
+      <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/arrow_back.png" alt="Back"></button>
+  </div>
+    <div id="header-e2">
+        <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/camera.png" alt="Camera"></button>
+    </div>  
+    <div id="header-e3"> 
+        OIDA
+    </div>
+
+</div>
+
     <body>
     
 
@@ -61,16 +75,10 @@
 
             <div class="row" style="margin-bottom: 60px">
 
-                <button  class="btn btn-large btn-danger mr-1" id="predict">predict</button>
+                <button  id="predict">predict</button>
 
             </div>
-            <div class="row">
-               
-                <button name="buttonClick" onclick="callAnothePage()">Historique</button>
-             <button name="buttonClick" onclick="callAnothePage2()">Bouteille PET</button>
-            </div>
 
-            <div id="text"></div>
 
         </div>
         <!--<script type="text/javascript" src="cordova.js"></script>-->
@@ -96,10 +104,6 @@
          function callAnothePage()
          {
             window.location = "historique.html";
-         }
-         function callAnothePage2()
-         {
-            window.location = "bouteille_PET.html";
          }
 
 
