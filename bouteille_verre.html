@@ -19,44 +19,42 @@
         <title>OIDA</title>
     </head>
 <body>
-    
+
 
 <div id="historique_header">
 	<div id="header-e1">
-	    <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/arrow_back.png" alt="Back"></button>
+	    <img id="image_header" src="img/arrow_back.png" alt="Back">
 	</div>
     <div id="header-e2">
-        <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/camera.png" alt="Camera"></button>
-    </div>  
-    <div id="header-e3"> 
-        Bouteille PET
+        <img id="image_header" src="img/camera.png" alt="Camera">
+    </div>
+    <div id="header-e3">
+        Bouteille verre
     </div>
 
 </div>
 
-<div id="poubelle_jaune">
-    <img id="image_title" src="img/pictojaune.svg" align="center" >
-        <p id="titre">Poubelle Jaune</p>
+<div id="poubelle_verre">
+
+        <img id="image_title" src="img/pictoverre.svg">
+        <p id="titre">Silo à verre</p>
+
     <div>
-    <video width="320" height="240" controls>
-        <source src="img/video_test.mp4" type="video/mp4">
-    </video>
     </div>
     <div id="advices_block">
-        <p> vider <br/>
-        aplatir <br/>
+        <p> laisser le bouchon en plastique <br/>
         ne pas rincer </p>
     </div>
     <div>
         <img id="image_location" src="img/location.png" align="left" style="margin-top: 20px">
-        <p id="advices" style="padding-top: 20px;">une poubelle dans chaque immeuble</p>
-        <p id="advices" style="padding-bottom: 20px;">des silos dans l'espace public</p>
-    </div> 
+        <p id="advices" style="padding-top: 20px; padding-bottom:20px;">bac de tri et silo de tri <br/> <a>à proximité ></a></p>
+    </div>
 
 </div>
 
+
 <div class="impacts">
-    <button name="buttonClick" onclick="callAnothePage3()"><p class="impacts_titre"> impacts > </p></button>
+    <p class="impacts_titre"> impacts > </p>
     <img id="tortuecontente" align="left" src="img/tortuecontente.svg">
     <img id="tortuemalade" align="right" src="img/tortuemalade.svg">
     <img id="poubelle" align="left" src="img/poubelle.svg">
@@ -66,23 +64,6 @@
 </div>
 
 <div class="impacts" style="padding-bottom:0px;">
-  <button name="buttonClick" onclick="callAnothePage4()"><p class="impacts_titre" style="z-index:-1;"> antidotes > </p></button>
+  <p class="impacts_titre"> antidotes > </p>
   <img id="tortuemedecin" src="img/tortuemedecin.svg">
 </div>
-
-
-</body>
-<script type="text/javascript">
-    function callAnothePage()
-     {
-        window.location = "index.html";
-     }
-     function callAnothePage3()
-     {
-        window.location = "details_PET.html";
-     }
-     function callAnothePage4()
-     {
-        window.location = "antidotes_PET.html";
-     }
-</script>

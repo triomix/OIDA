@@ -3,7 +3,7 @@
     width: 100%;
     height: 42px;
     background: #FFFFFF;
-    border-bottom: 5px solid #F0FF40;
+    margin-bottom: 1px;
 }
 
 #header-e1 {
@@ -48,7 +48,7 @@
     margin-top: 0;
     margin-bottom: 0;
     text-transform:uppercase;
-    
+
 }
 
 #titre2 {
@@ -60,7 +60,7 @@
     text-align: center;
     margin-top: 20px;
     margin-bottom: 5px;
-    
+
 }
 
 #poubelle_jaune {
@@ -68,19 +68,24 @@
     margin-left: auto ;
     margin-right: auto ;
     background: #EBFF00;
+}
 
+#poubelle_verre {
+    width: 100% ;
+    margin-left: auto ;
+    margin-right: auto ;
+    background: #30EA9D;
 }
 
 #image_title {
-    height:42px
+  display: block;
+    height:auto;
     width:auto;/*maintain aspect ratio*/
-    max-width:42px;
     border: none;
-    display: block;
+    padding-left: 20px;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
-}
+
 }
 
 #image_location {
@@ -93,7 +98,7 @@
 }
 
 video {
-    margin-left: 10%; 
+    margin-left: 10%;
     width: 80%;
 }
 
@@ -124,10 +129,10 @@ video {
     margin-block-end: 0em;
     margin-top: 0;
     margin-bottom: 0;
-} 
+}
 
 
-#impacts {
+.impacts {
     width: 100% ;
     margin-left: auto ;
     margin-right: auto ;
@@ -135,7 +140,7 @@ video {
     padding-bottom: 20px;
 }
 
-#impacts_titre {
+.impacts_titre {
     position: relative;
     font-family: Rubik;
     font-style: normal;
@@ -147,7 +152,7 @@ video {
     text-transform:uppercase;
     padding-top: 10px;
     padding-bottom: 10px;
-    
+
 }
 
 #gauge {
@@ -156,15 +161,63 @@ video {
     height: 25px;
     background: linear-gradient(90deg, #00FF38 26.4%, #FFD600 39.88%, #FFD600 68.77%, #FF0000 83.21%);
     border-radius: 12.5px;
-    margin: 5 auto;
-    width: 80%; 
+    margin-bottom: 20px;
+
+    margin-left: auto ;
+    margin-right: auto ;
+    pad
+    margin: auto;
+    width: 80%;
 
 }
 
+#tortuecontente
+{
+  z-index: +2;
+  position: relative;
+  left: 20px;
+  top: 20px;
+}
+
+#tortuemalade
+{
+  z-index: +2;
+  position: relative;
+  right:20px;
+  top: 20px;
+
+}
+
+#poubelle
+{
+  z-index: +2;
+  position: relative;
+  left:30%;
+  top:30px;
+}
+
+#recyclage
+{
+  z-index: +2;
+  position: relative;
+  left:5%;
+  top:30px;
+}
+
+#tortuemedecin {
+  z-index: +3;
+  position: relative;
+  bottom:0px;
+  left : 20px;
+  margin-top: -40px;
+}
+
 #details_block {
-    width: 95% ;
+    width: 90% ;
     margin-left: auto ;
     margin-right: auto ;
+    padding-left: 20px ;
+    padding-right: 20px ;
     position: relative;
     font-family: Rubik;
     font-style: normal;
@@ -172,13 +225,13 @@ video {
     font-size: 14px;
     text-align: left;
     margin-block-start: 0em;
-    margin-block-end: 0em;
+    margin-block-end: 20px;
     margin-top: 0;
     margin-bottom: 0;
-} 
+}
 
 #antidote {
-    width: 90% ;
+    width: 80% ;
     margin-left: auto ;
     margin-right: auto ;
     position: relative;
@@ -191,8 +244,13 @@ video {
     margin-bottom: 0;
     background: #F0FF40;
     border-radius: 16px;
-    padding: 5px 5px 5px 5px;
-} 
+    padding-top: 5px;
+}
+
+a {
+  font-weight: 700;
+  text-decoration: underline;
+}
 
 #initiative {
     width: 50% ;
@@ -214,3 +272,16 @@ video {
     border-width: 3px;
 
 }
+
+a {
+    color: black;
+    font-weight: bold;
+}
+
+#trait_dessus 
+{ 
+border-top: 1px solid #000; 
+width : 700px; 
+background-color: #EBFF00;
+height: 5px;
+} 

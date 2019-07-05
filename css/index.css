@@ -114,7 +114,13 @@ button {
     outline:none;
     width: 90%;
     margin-left: 5%;
-    margin-right: 5%
+    margin-right: 5%;
+}
+
+button:focus{
+    background-color: black;
+    color: white;
+    filter: invert(100%);
 }
 
 #predict {
@@ -140,5 +146,4 @@ button {
 
 #video {
     width: 100%;
-    height:90%;
 }
