@@ -307,8 +307,8 @@ const app = new Vue({
         },
         modelLoaded:function() {
           console.log('Model loaded!');
-          document.querySelector('#text').innerText = "Model loaded ????";
-          //this.classifier.load("models/model.json", this.customModelLoaded);
+          document.querySelector('#text').innerText = "Model loaded";
+          this.classifier.load("models/model.json", this.customModelLoaded);
         },
 
         customModelLoaded:function() {
