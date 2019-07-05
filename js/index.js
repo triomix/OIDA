@@ -11,22 +11,22 @@ const app = new Vue({
           {
             label:"third",
             url:"gateau.html",
-            name:"gateau"
+            name:"PLASTIQUE DUR"
           },
           {
             label:"first",
             url:"bouteille_verre.html",
-            name:"bouteille enverre"
+            name:"BOUTEILLE EN VERRE"
           },
           {
             label:"four",
-            url:"bouteille_pet.html",
-            name:"bouteille"
+            url:"bouteille_PET.html",
+            name:"BOUTEILLE PET"
           },
           {
             label:"second",
             url:"canette.html",
-            name:"canette"
+            name:"ALUMINIUM"
           }
         ]
     },
@@ -220,7 +220,7 @@ const app = new Vue({
             document.getElementById("results").style.visibility = "visible";
 
             var page = this.getPageForLabel(results[0].label);
-            document.getElementById("result").innerText = "Trouvé ! : " + page.name;
+            document.getElementById("result").innerText =  page.name;
 
             this.currentPage = page;
 
