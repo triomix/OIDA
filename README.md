@@ -16,4 +16,7 @@
 
      cordova run browser
      cordova run ios
+     
+ **Hosting**
+ You can test the app here : https://www.screen-club.com/oidaindex/index.html
 
