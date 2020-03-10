@@ -18,5 +18,11 @@
      cordova run ios
      
  **Hosting**
- You can test the app here : https://www.screen-club.com/oidaindex/index.html
+ 
+ To do
+ ~~You can test the app here : https://www.screen-club.com/oidaindex/index.html~~
+ 
+ **TO DO**
+- Récupérer fichier models.json + bin initiaux issus du workshop
+- Renommer dans train.js, les libellés des boutons pour savoir ce que l'on entraine
 
