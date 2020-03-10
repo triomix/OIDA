@@ -22,7 +22,7 @@ const app = new Vue({
             this.populateSources();
             document.querySelector('#text').innerText = "hello";
         },
-                    
+
         addButtonListeners:function() {
 
           // video start
@@ -68,6 +68,9 @@ const app = new Vue({
             var deviceInfo = deviceInfos[i];
             var option = document.createElement('option');
             option.value = deviceInfo.deviceId;
+            console.log("Device Id : " + deviceInfo.deviceId);
+
+
             if (deviceInfo.kind === 'audioinput') {
               option.text = deviceInfo.label ||
                 'microphone ' + (audioSelect.length + 1);
@@ -92,9 +95,9 @@ const app = new Vue({
               track.stop();
             });
           }
-        
+
           var constraints = {
-            
+
             video: {
               deviceId: {exact: videoSelect.value}
             }
@@ -103,11 +106,11 @@ const app = new Vue({
           document.querySelector('#text').innerText = "Asking permission";
 
           navigator.mediaDevices.getUserMedia(constraints).then(this.gotStream).catch(this.handleError);
-      
+
           this.startClassifier();
 
-        }, 
-        
+        },
+
         gotStream:function(stream) {
 
           window.stream = stream; // make stream available to console
@@ -119,7 +122,7 @@ const app = new Vue({
         startVideo:function() {
 
           this.getStream();
-          
+
         },
         play:function() {
           var video = document.getElementById('video');

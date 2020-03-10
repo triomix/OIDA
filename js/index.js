@@ -39,7 +39,7 @@ const app = new Vue({
             this.populateSources();
 
         },
-                    
+
         addButtonListeners:function() {
 
           document.querySelector('#predict').addEventListener("click", this.predict, false);
@@ -50,26 +50,42 @@ const app = new Vue({
 
         populateSources:function() {
 
-          var audioSelect = document.querySelector('select#audioSource');
+          //var audioSelect = document.querySelector('select#audioSource');
           var videoSelect = document.querySelector('select#videoSource');
+          videoSelect.onchange = this.startVideo;
 
           navigator.mediaDevices.enumerateDevices().then(this.gotDevices).catch(this.handleError);
-
-          audioSelect.onchange = this.getStream;
-          videoSelect.onchange = this.getStream;
 
 
         },
         handleError:function(error) {
 
+          //log to console first
           console.log('Error: ', error);
+
+          if (error.name == "NotFoundError" || error.name == "DevicesNotFoundError") {
+              //required track is missing
+          } else if (error.name == "NotReadableError" || error.name == "TrackStartError") {
+              //webcam or mic are already in use
+          } else if (error.name == "OverconstrainedError" || error.name == "ConstraintNotSatisfiedError") {
+              //constraints can not be satisfied by avb. devices
+              console.log('OverConstained Error, did you ask permissions ?');
+
+          } else if (error.name == "NotAllowedError" || error.name == "PermissionDeniedError") {
+              //permission denied in browser
+          } else if (error.name == "TypeError" || error.name == "TypeError") {
+              //empty constraints object
+          } else {
+              //other errors
+          }
+
           document.querySelector('#text').innerText = error;
 
         },
 
         gotDevices:function(deviceInfos) {
 
-          var audioSelect = document.querySelector('select#audioSource');
+          //var audioSelect = document.querySelector('select#audioSource');
           var videoSelect = document.querySelector('select#videoSource');
 
           var nVideosCount = 0;
@@ -78,11 +94,15 @@ const app = new Vue({
             var deviceInfo = deviceInfos[i];
             var option = document.createElement('option');
             option.value = deviceInfo.deviceId;
+            console.log("Device Id : " + deviceInfo.deviceId);
 
             if (deviceInfo.kind === 'audioinput') {
-              option.text = deviceInfo.label ||
+            /*  option.text = deviceInfo.label ||
                 'microphone ' + (audioSelect.length + 1);
               audioSelect.appendChild(option);
+
+              console.log("Add audio source to choices : " + deviceInfo.label);
+            */
             } else if (deviceInfo.kind === 'videoinput') {
               option.text = deviceInfo.label || 'camera ' + (videoSelect.length + 1);
               videoSelect.appendChild(option);
@@ -90,7 +110,9 @@ const app = new Vue({
               if(nVideosCount == 1)
                 this.videoSecondValue = option.value;
 
-                nVideosCount ++;
+              nVideosCount ++;
+
+              console.log("Add video source to choices : " + deviceInfo.label);
 
             } else {
              // console.log('Found one other kind of source/device: ', deviceInfo);
@@ -103,27 +125,31 @@ const app = new Vue({
 
         getStream:function(){
 
+          var videoSelect = document.querySelector('select#videoSource');
+/*
           if (window.stream) {
             window.stream.getTracks().forEach(function(track) {
               track.stop();
             });
           }
-        
+*/
           var constraints = {
-            
+            audio: false,
             video: {
-              deviceId: {exact: this.videoSecondValue}
+              deviceId: {exact: videoSelect.value}
             }
           };
 
           document.querySelector('#text').innerText = "Asking permission";
 
           navigator.mediaDevices.getUserMedia(constraints).then(this.gotStream).catch(this.handleError);
-  
-          this.startClassifier();
+          console.log("Stream loaded");
 
-        }, 
-        
+          this.startClassifier();
+          console.log("Classifier done !");
+
+        },
+
         gotStream:function(stream) {
 
           window.stream = stream; // make stream available to console
@@ -133,10 +159,9 @@ const app = new Vue({
         },
 
         startVideo:function() {
-
           this.getStream();
-         
         },
+
         play:function() {
           var video = document.getElementById('video');
           video.play();
@@ -172,7 +197,7 @@ const app = new Vue({
         modelLoaded:function() {
           console.log('Model loaded!');
           document.querySelector('#text').innerText = "Model loaded";
-          this.classifier.load("models/model.json", this.customModelLoaded);
+          this.classifier.load("www/models/model.json", this.customModelLoaded);
         },
 
         customModelLoaded:function() {
@@ -243,7 +268,7 @@ const app = new Vue({
           document.getElementById("predict-container").style.display = "grid";
           document.getElementById("results").style.visibility = "hidden";
 
-          
+
         },
 
         showPage() {

@@ -14,21 +14,24 @@
 <div id="historique_header">
 
   <div id="header-e1">
-      
+
   </div>
 
     <div id="header-e2">
         <button name="buttonClick" onclick="callAnothePage()"><img id="image_header" src="img/historique.png" alt="Camera"></button>
-    </div>  
-    <div id="header-e3"> 
+    </div>
+    <div id="header-e3">
         <img id="image_header" src="img/logosansbaseline.svg" alt="Back">
     </div>
 </div>
-    <body>    
+    <body>
         <div class="container" id="app">
-            
+
             <video style="margin-top:8px" id="video" width="640" height="480" autoplay  webkit-playsinline="true" playsinline="true"></video>
 
+            <div class="select">
+                <label for="videoSource">Video source: </label><select id="videoSource"></select>
+            </div>
 
             <div class="row" style="margin-bottom: 60px" id="predict-container">
                 <button id="predict" style="visibility: hidden;">Scanner</button>
@@ -39,14 +42,15 @@
                         <button id="result" >J'ai trouvé un super déchet</button>
                 </div>
                 <div class="row" style="margin-bottom: 60px">
-                        <button id="retry" >Recommencer</button>                
+                        <button id="retry" >Recommencer</button>
                 </div>
             </div>
-            <div id="text" style="visibility: hidden;"></div>
+            <div id="text"> . . . . . . . . </div>
         </div>
         <div class="row" style="visibility: hidden;"  >
             <div class="col-sm">
-                <div class="select">
+              <!--
+              <div class="select">
                     <label for="audioSource">Audio source: </label><select id="audioSource"></select>
                 </div>
                 <div class="select">
@@ -54,6 +58,7 @@
                 </div>
                     <button  class="btn btn-primary mr-1" id="start-video">play</button>
                 </div>
+                -->
         </div>
         <!--<script type="text/javascript" src="cordova.js"></script>-->
         <script src="js/jquery-3.3.1.js"></script>
