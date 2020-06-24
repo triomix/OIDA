@@ -1,22 +1,25 @@
-
 # OIDA
 
- **First install**
+## Install locally
+
+```shell script
+npm install -g cordova
+cordova create oida
+cd oida
+cordova platform add browser
+cordova platform add ios
+cordova plugin add https://github.com/apache/cordova-plugin-camera.git
+```
  
-    npm install -g cordova
-    cordova create oida
-    cd oida
-    cordova platform add browser
-    cordova platform add ios
-	cordova plugin add https://github.com/apache/cordova-plugin-camera.git
+Then clone this repo into `oida/www`
 
-   Then clone this repo into `oida/www`
-    
- **Run**
+### Launch the server
 
-     cordova run browser
-     cordova run ios
-     
+```shell script
+cordova run browser
+# cordova run ios # Does not work.
+```    
+
  **Hosting**
  
  To do
