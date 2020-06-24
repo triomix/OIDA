@@ -25,7 +25,7 @@ cordova run browser
 
  **Hosting**
  
- To do
+ To do : tutorial how to deploy on a personal server
  ~~You can test the app here : https://www.screen-club.com/oidaindex/index.html~~
  
  **TO DO**
