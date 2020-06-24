@@ -21,12 +21,15 @@ cordova run browser
 # cordova run ios # Does not work.
 ```    
 
+
+
  **Hosting**
  
  To do
  ~~You can test the app here : https://www.screen-club.com/oidaindex/index.html~~
  
  **TO DO**
+- Make the server easily deployable. 
 - Récupérer fichier models.json + bin initiaux issus du workshop
 - Renommer dans train.js, les libellés des boutons pour savoir ce que l'on entraine
 - refaire une release
