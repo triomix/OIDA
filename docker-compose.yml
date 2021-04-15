@@ -1,0 +1,9 @@
+version: '3'
+services:
+  oida:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8000:8000
