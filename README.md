@@ -1,6 +1,14 @@
 
 # OIDA
 
+## Use docker-compose
+
+Start your container by launching
+> docker-compose up
+
+You can now access your container on http://localhost:8000/index.html
+
+## Manual Install
  **First install**
  
     npm install -g cordova
