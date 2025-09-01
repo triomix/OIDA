@@ -26,3 +26,6 @@
 - Récupérer fichier models.json + bin initiaux issus du workshop
 - Renommer dans train.js, les libellés des boutons pour savoir ce que l'on entraine
 
+
+
+<!-- Security scan triggered at 2025-09-02 00:10:38 -->
